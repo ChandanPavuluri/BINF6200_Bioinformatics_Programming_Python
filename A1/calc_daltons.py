@@ -1,8 +1,9 @@
+"""
 #!/usr/bin/env python3
 #calc_daltons.py
-
-#Hard-coding the protein sequence 
-protein_sequence ='''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC
+"""
+#Hard-coding the protein sequence
+PROTEIN_SEQUENCE = '''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC
 CFVVHKRCHEFVTFSCPGADKGPASDDPRSKHKFKIHTYSSPTFCDHCGSLLYGLIHQGMKCDTCMMNVH
 KRCVMNVPSLCGTDHTERRGRIYIQAHIDREVLIVVVRDAKNLVPMDPNGLSDPYVKLKLIPDPKSESKQ
 KTKTIKCSLNPEWNETFRFQLKESDKDRRLSVEIWDWDLTSRNDFMGSLSFGISELQKAGVDGWFKLLSQ
@@ -13,12 +14,11 @@ NIWDGVTTKTFCGTPDYIAPEIIAYQPYGKSVDWWAFGVLLYEMLAGQAPFEGEDEDELFQSIMEHNVAY
 PKSMSKEAVAICKGLMTKHPGKRLGCGPEGERDIKEHAFFRYIDWEKLERKEIQPPYKPKARDKRDTSNF
 DKEFTRQPVELTPTDKLFIMNLDQNEFAGFSYTNPEFVINV'''
 
-protein_sequence = protein_sequence.replace('\r',"").replace('\n',"")
+PROTEIN_SEQUENCE = PROTEIN_SEQUENCE.replace('\r', "").replace('\n', "")
 
-amino_acids = len(protein_sequence)
+AMINO_ACIDS = len(PROTEIN_SEQUENCE)
 
 
-print('The length of "Protein kinase C beta type" is:',str(amino_acids))
+print('The length of "Protein kinase C beta type" is:', str(AMINO_ACIDS))
 
-print('The average weight of this protein sequence in kilodaltons is:' ,str((amino_acids*110)/1000))
-
+print('The average weight of this protein sequence in kilodaltons is:', str((AMINO_ACIDS*110)/1000))
