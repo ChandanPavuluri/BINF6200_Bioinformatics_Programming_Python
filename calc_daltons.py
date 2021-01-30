@@ -3,8 +3,8 @@
 #calc_daltons.py
 """
 def my_function():
-    #Hard-coding the protein sequence
-    protein = '''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC
+    # Hard-coding the protein sequence
+    Protein = '''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC
     CFVVHKRCHEFVTFSCPGADKGPASDDPRSKHKFKIHTYSSPTFCDHCGSLLYGLIHQGMKCDTCMMNVH
     KRCVMNVPSLCGTDHTERRGRIYIQAHIDREVLIVVVRDAKNLVPMDPNGLSDPYVKLKLIPDPKSESKQ
     KTKTIKCSLNPEWNETFRFQLKESDKDRRLSVEIWDWDLTSRNDFMGSLSFGISELQKAGVDGWFKLLSQ
@@ -15,13 +15,16 @@ def my_function():
     PKSMSKEAVAICKGLMTKHPGKRLGCGPEGERDIKEHAFFRYIDWEKLERKEIQPPYKPKARDKRDTSNF
     DKEFTRQPVELTPTDKLFIMNLDQNEFAGFSYTNPEFVINV'''
 
-    protein = protein.replace('\r', "").replace('\n', "")
+    Protein = Protein.replace('\r', "").replace('\n', "")
 
-    aminoacids = len(protein)
+    Amino_acids = len(Protein)
 
-    print('The length of "Protein kinase C beta type" is:', str(aminoacids))
+    print('The length of "Protein kinase C beta type" is:', str(Amino_acids))
 
-    print('The average weight of this protein sequence in kilodaltons is:', str((aminoacids*110)/1000))
+    Average_weight = (Amino_acids * 110) / 1000
+
+    print('The average weight of this protein sequence in kilodaltons is:', str(Average_weight))
+
 
 if __name__ == "__main__":
     my_function()
