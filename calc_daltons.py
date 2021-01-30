@@ -4,7 +4,7 @@
 """
 def my_function():
     # Hard-coding the protein sequence
-    Protein = '''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC
+    protein = '''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC
     CFVVHKRCHEFVTFSCPGADKGPASDDPRSKHKFKIHTYSSPTFCDHCGSLLYGLIHQGMKCDTCMMNVH
     KRCVMNVPSLCGTDHTERRGRIYIQAHIDREVLIVVVRDAKNLVPMDPNGLSDPYVKLKLIPDPKSESKQ
     KTKTIKCSLNPEWNETFRFQLKESDKDRRLSVEIWDWDLTSRNDFMGSLSFGISELQKAGVDGWFKLLSQ
@@ -15,15 +15,15 @@ def my_function():
     PKSMSKEAVAICKGLMTKHPGKRLGCGPEGERDIKEHAFFRYIDWEKLERKEIQPPYKPKARDKRDTSNF
     DKEFTRQPVELTPTDKLFIMNLDQNEFAGFSYTNPEFVINV'''
 
-    Protein = Protein.replace('\r', "").replace('\n', "")
+    protein = protein.replace('\r', "").replace('\n', "")
 
-    Amino_acids = len(Protein)
+    amino_acids = len(protein)
 
-    print('The length of "Protein kinase C beta type" is:', str(Amino_acids))
+    print('The length of "Protein kinase C beta type" is:', str(amino_acids))
 
-    Average_weight = (Amino_acids * 110) / 1000
+    average_weight = (amino_acids * 110) / 1000
 
-    print('The average weight of this protein sequence in kilodaltons is:', str(Average_weight))
+    print('The average weight of this protein sequence in kilodaltons is:', str(average_weight))
 
 
 if __name__ == "__main__":
