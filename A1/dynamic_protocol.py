@@ -1,10 +1,12 @@
+"""
 #!/usr/bin/env python3
 #dynamic_protocol.py
+"""
 # Instruct user how to prepare a 3 ml solution of
 # 10 mM NaCl and 0.5 mM MgCl2, given stock solutions
 # of 1 M NaCl and 0.1 M MgCl2.
 
-final_vol=int(input("Please enter the final volume of the solution (ml): "))
+final_vol = int(input("Please enter the final volume of the solution (ml): "))
 
         # use ml volumes throughout the program
 
