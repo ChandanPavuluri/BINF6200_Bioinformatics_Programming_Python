@@ -17,7 +17,7 @@ PKSMSKEAVAICKGLMTKHPGKRLGCGPEGERDIKEHAFFRYIDWEKLERKEIQPPYKPKARDKRDTSNF
 DKEFTRQPVELTPTDKLFIMNLDQNEFAGFSYTNPEFVINV'''
     # To get rid of newline characters
     protein = protein.replace('\r', "").replace('\n', "")
-    # Calculate the length of Sequence    
+    # Calculate the length of Sequence
     amino_acids = len(protein)
     # Prints the statement
     print('The length of "Protein kinase C beta type" is:', str(amino_acids))

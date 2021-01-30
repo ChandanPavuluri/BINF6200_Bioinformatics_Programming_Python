@@ -2,8 +2,10 @@
 #!/usr/bin/env python3
 #calc_daltons.py
 """
-#Hard-coding the protein sequence
-PROTEIN_SEQ = '''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC
+def my_function():
+    """Function to disable Uppercase naming convention """
+    # Hard-coding the protein sequence
+    protein = '''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC
 CFVVHKRCHEFVTFSCPGADKGPASDDPRSKHKFKIHTYSSPTFCDHCGSLLYGLIHQGMKCDTCMMNVH
 KRCVMNVPSLCGTDHTERRGRIYIQAHIDREVLIVVVRDAKNLVPMDPNGLSDPYVKLKLIPDPKSESKQ
 KTKTIKCSLNPEWNETFRFQLKESDKDRRLSVEIWDWDLTSRNDFMGSLSFGISELQKAGVDGWFKLLSQ
@@ -13,12 +15,16 @@ EYVNGGDLMYHIQQVGRFKEPHAVFYAAEIAIGLFFLQSKGIIYRDLKLDNVMLDSEGHIKIADFGMCKE
 NIWDGVTTKTFCGTPDYIAPEIIAYQPYGKSVDWWAFGVLLYEMLAGQAPFEGEDEDELFQSIMEHNVAY
 PKSMSKEAVAICKGLMTKHPGKRLGCGPEGERDIKEHAFFRYIDWEKLERKEIQPPYKPKARDKRDTSNF
 DKEFTRQPVELTPTDKLFIMNLDQNEFAGFSYTNPEFVINV'''
+    # To get rid of newline characters
+    protein = protein.replace('\r', "").replace('\n', "")
+    # Calculate the length of Sequence
+    amino_acids = len(protein)
+    # Prints the statement
+    print('The length of "Protein kinase C beta type" is:', str(amino_acids))
+    # Calculate the average weight
+    average_weight = (amino_acids * 110) / 1000
+    # Prints the statement
+    print('The average weight of this protein sequence in kilodaltons is:', str(average_weight))
 
-PROTEIN_SEQ = PROTEIN_SEQ.replace('\r', "").replace('\n', "")
-
-AMINO_ACIDS = len(PROTEIN_SEQ)
-
-
-print('The length of "Protein kinase C beta type" is:', str(AMINO_ACIDS))
-
-print('The average weight of this protein sequence in kilodaltons is:', str((AMINO_ACIDS*110)/1000))
+if __name__ == "__main__":
+    my_function()
