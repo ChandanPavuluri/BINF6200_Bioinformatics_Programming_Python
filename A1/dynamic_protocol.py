@@ -3,7 +3,8 @@
 #dynamic_protocol.py
 """
 def my_function():
-    """Function to disable Uppercase naming convention """
+    """Function helps in naming the variables in lower case"""
+
     # Instruct user how to prepare a 3 ml solution of
     # 10 mM NaCl and 0.5 mM MgCl2, given stock solutions
     # of 1 M NaCl and 0.1 M MgCl2.

@@ -3,7 +3,7 @@
 #calc_daltons.py
 """
 def my_function():
-    """Function to disable Uppercase naming convention """
+    """Function helps in naming the variables in lower case"""
 
     # Hard-coding the protein sequence
     protein = '''MADPAAGPPPSEGEESTVRFARKGALRQKNVHEVKNHKFTARFFKQPTFCSHCTDFIWGFGKQGFQCQVC

@@ -4,7 +4,7 @@
 """
 import sys
 def my_function():
-    """Function to disable Uppercase naming convention """
+    """Function helps in naming the variables in lower case"""
 
     # Input- Entering the name of DNA sequence
     seq_name = str(input("Please enter a name for the DNA sequence: "))
