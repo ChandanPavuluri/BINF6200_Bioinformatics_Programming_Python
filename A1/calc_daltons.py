@@ -31,6 +31,7 @@ DKEFTRQPVELTPTDKLFIMNLDQNEFAGFSYTNPEFVINV'''
 
     # Prints the statement
     print('The average weight of this protein sequence in kilodaltons is:', str(average_weight))
+    #my first commit
 
 if __name__ == "__main__":
     my_function()
