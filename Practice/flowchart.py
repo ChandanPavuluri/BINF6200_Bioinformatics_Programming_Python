@@ -1,19 +1,17 @@
 import re
-my_file = open('myfile.txt', 'r')
+FASTA = open('myfile.txt', 'r')
 
-sequence = []
 headers = []
-mydict={}
-for line in my_file:
-    # Seperate the header
-    if re.search(">.*", line):
+Seq=[]
+
+for line in FASTA:
+    if re.search("^>.*", line):
         headers.append(line)
+    else:
+        line= line.replace('\n', '')
+        Seq.append(line)
 
-    elif re.search("^[A-Z]", line):
-        sequence.append(line)
-
-
-
-for i,seq in enumerate(sequence):
+for i,seq in enumerate(Seq):
     length=len(seq)
-    print(headers[i], length)
+    print(headers[i],length)
+
