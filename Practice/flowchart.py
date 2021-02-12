@@ -5,7 +5,7 @@ headers = []
 Seq=[]
 
 for line in FASTA:
-    if re.search("^>.*", line):
+    if re.search("^>", line):
         headers.append(line)
     else:
         line= line.replace('\n', '')
