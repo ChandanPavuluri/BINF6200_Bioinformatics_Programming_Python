@@ -1,87 +1,88 @@
 import sys
 import math
 
-data=[]
-column=[]
-na=[]
+data = []
+column_data = []
+nan = []
 
 def min_max():
-    column.sort()
-    minimum = column[0]
-    maximum = column[-1]
+    column_data.sort()
+    minimum = column_data[0]
+    maximum = column_data[-1]
     print("Maximum = {:.3f}".format(maximum))
     print("Minimum = {:.3f}".format(minimum))
 
 
-def Variance():
+def Variance_StdDev():
     var = []
-    for num in column:
+    for num in column_data:
        var.append((num - Average)**2)
     try:
-        Variance = sum(var)/(ValidNum-1)
+        variance = sum(var)/(ValidNum-1)
     except ZeroDivisionError:
-        Variance = 0
-    print("Variance = {:.3f}".format(Variance))
-    Std_Dev = math.sqrt(Variance)
+        variance = 0
+    print("Variance = {:.3f}".format(variance))
+    Std_Dev = math.sqrt(variance)
     print("Std Dev = {:.3f}".format(Std_Dev))
 
 def Median():
-    column.sort()
+    column_data.sort()
 # Finding the position of the median
-    if len(column) % 2 == 0:
-        first_median = column[len(column) // 2]
-        second_median = column[len(column) // 2 - 1]
+    if len(column_data) % 2 == 0:
+        first_median = column_data[len(column_data) // 2]
+        second_median = column_data[len(column_data) // 2 - 1]
         median = (first_median + second_median) / 2
     else:
-        median = column[len(column) // 2]
+        median = column_data[len(column_data) // 2]
 
     print("Median = {:.3f}".format(median))
 if __name__ == "__main__":
+    arg_count = len(sys.argv) - 1
+    # if length of the argument count was less than 2 we need to raise an exception
+    if arg_count < 2:
+        raise Exception("This script requires 2 arguments: Datafile name and then column number")
 
-    datafile=sys.argv[1]
-    coln=sys.argv[2]
+    datafile = sys.argv[1]
+    column_number = sys.argv[2]
 
     with open(datafile) as input_file:
         for line in input_file:
-            i=1
+            i = 1
             try:
-                num = line.split("\t")[int(coln)]
+                num = line.split("\t")[int(column_number)]
                 data.append(num)
-                i=+1
+                i = +1
             except IndexError:
-                print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}".format(coln,i,datafile))
+                print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}".format(column_number,i,datafile))
                 sys.exit()
-   # print(data)
     
     removed = 0
     for q,val in enumerate(data):
         try:
             if val in ("NaN","nan"):
-                na.append(val)
+                nan.append(val)
                 removed+=1
             else:
-                column.append(float(val))
+                column_data.append(float(val))
         except ValueError:
             print("Skipping line number {} : could not convert string to float: '{}'".format(q+1,val))
             removed+= 1
     
-    Count = len(column)+removed
-    ValidNum = len(column)
+    Count = len(column_data)+removed
+    ValidNum = len(column_data)
 
     #Calculating Average
     try:
-        Average = sum(column)/ValidNum
+        Average = sum(column_data)/ValidNum
     except ZeroDivisionError:
-        print("Error: There were no valid number(s) in column {} in file: {}".format(coln,datafile))
+        print("Error: There were no valid number(s) in column {} in file: {}".format(column_number,datafile))
         sys.exit()
 
 
-     
-    print(coln)
-
+    print(column_number)
     print("Count = {:.3f}".format(Count))
     print("ValidNum = {:.3f}".format(ValidNum))
     print("Average = {:.3f}".format(Average))
     min_max()
-    Variance()
+    Variance_StdDev()
     Median()
