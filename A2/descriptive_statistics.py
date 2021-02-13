@@ -25,7 +25,17 @@ def Variance():
     Std_Dev = math.sqrt(Variance)
     print("Std Dev = {:.3f}".format(Std_Dev))
 
+def Median():
+    column.sort()
+# Finding the position of the median
+    if len(column) % 2 == 0:
+        first_median = column[len(column) // 2]
+        second_median = column[len(column) // 2 - 1]
+        median = (first_median + second_median) / 2
+    else:
+        median = column[len(column) // 2]
 
+    print("Median = {:.3f}".format(median))
 if __name__ == "__main__":
 
     datafile=sys.argv[1]
@@ -74,4 +84,4 @@ if __name__ == "__main__":
     print("Average = {:.3f}".format(Average))
     min_max()
     Variance()
-  
+    Median()
