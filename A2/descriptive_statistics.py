@@ -1,17 +1,29 @@
 import sys
-import re
-import collections
+import math
+
 data=[]
 column=[]
 na=[]
 
-def average():
+def min_max():
+    column.sort()
+    minimum = column[0]
+    maximum = column[-1]
+    print("Maximum = {:.3f}".format(maximum))
+    print("Minimum = {:.3f}".format(minimum))
+
+
+def Variance():
+    var = []
+    for num in column:
+       var.append((num - Average)**2)
     try:
-        avg = sum(column)/int(len(column))
-        print("Average = {:.3f}".format(avg)) 
+        Variance = sum(var)/(ValidNum-1)
     except ZeroDivisionError:
-        print("There were no valid number(s) in column {} in file: {}".format(coln,datafile))
-        sys.exit()
+        Variance = 0
+    print("Variance = {:.3f}".format(Variance))
+    Std_Dev = math.sqrt(Variance)
+    print("Std Dev = {:.3f}".format(Std_Dev))
 
 
 if __name__ == "__main__":
@@ -27,28 +39,39 @@ if __name__ == "__main__":
                 data.append(num)
                 i=+1
             except IndexError:
-                print("There is no valid 'list index' in column {} in line {} in file: {}".format(coln,i,datafile))
+                print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}".format(coln,i,datafile))
                 sys.exit()
    # print(data)
     
-    count=0
-    NaN = None
-    nan = None
+    removed = 0
     for q,val in enumerate(data):
         try:
-            if (val == "NaN" or val == "nan"):
+            if val in ("NaN","nan"):
                 na.append(val)
-                count+=1
+                removed+=1
             else:
                 column.append(float(val))
         except ValueError:
             print("Skipping line number {} : could not convert string to float: '{}'".format(q+1,val))
-            count+= 1
+            removed+= 1
+    
+    Count = len(column)+removed
+    ValidNum = len(column)
 
-   # print(column) 
+    #Calculating Average
+    try:
+        Average = sum(column)/ValidNum
+    except ZeroDivisionError:
+        print("Error: There were no valid number(s) in column {} in file: {}".format(coln,datafile))
+        sys.exit()
+
+
+     
     print(coln)
-    print(len(column)+count)
-    print(len(column))
-    average()
 
+    print("Count = {:.3f}".format(Count))
+    print("ValidNum = {:.3f}".format(ValidNum))
+    print("Average = {:.3f}".format(Average))
+    min_max()
+    Variance()
   
