@@ -49,14 +49,14 @@ if __name__ == "__main__":
 
     DATA = []
     COLUMN_DATA = []
-    NAN = []
+    nan = []
 
     with open(INPUT_DATA_FILE) as input_file:
         for line in input_file:
             i = 1
             try:
                 num = line.split("\t")[int(COLUMN_NUMBER)]
-                data.append(num)
+                DATA.append(num)
                 i = +1
             except IndexError:
                 print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
