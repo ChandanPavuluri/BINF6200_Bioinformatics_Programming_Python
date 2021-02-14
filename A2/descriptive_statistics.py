@@ -7,57 +7,64 @@ import math
 
 def iterate():
 
-    data_file = sys.argv[1]
-    column_number = sys.argv[2]
+    input_file_name = sys.argv[1]
+    column_to_parse = sys.argv[2]
 
-    data = []
-    column_data = []
-    nan = []
+    global DATA
+    global COLUMN_DATA
+    global NAN 
 
-    with open(data_file) as input_file:
+    DATA = []
+    COLUMN_DATA = []
+    NAN =[]
+    with open(input_file_name) as input_file:
         for line in input_file:
             i = 1
             try:
-                num = line.split("\t")[int(column_number)]
-                data.append(num)
+                num = line.split("\t")[int(column_to_parse)]
+                DATA.append(num)
                 i = +1
             except IndexError:
                 print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
-                      .format(column_number, i, data_file))
+                      .format(column_to_parse, i, input_file_name))
                 sys.exit()
-    removed_value = 0
-    for index, value in enumerate(data):
+    global REMOVED_VALUE
+    REMOVED_VALUE = 0
+    for index, value in enumerate(DATA):
         try:
             if value in ("NaN", "nan"):
-                nan.append(value)
-                removed_value += 1
+                NAN.append(value)
+                REMOVED_VALUE += 1
             else:
-                column_data.append(float(value))
+                COLUMN_DATA.append(float(value))
         except ValueError:
             print("Skipping line number {} : could not convert string to float: '{}'"
                   .format(index + 1, value))
-            removed_value += 1
-           
-def count_validnum_average():
+            REMOVED_VALUE += 1
+
+def count_average():
 
     # Calculating length of total column
-    Count = len(column_data) + removed_value
+    global COUNT
+    COUNT = len(COLUMN_DATA) + REMOVED_VALUE
 
     # Calculating length of valid Numbers
-    ValidNum = len(column_data)
+    global VALIDNUM
+    VALIDNUM = len(COLUMN_DATA)
 
     #Calculating Average
+    global AVERAGE
     try:
-        Average = sum(column_data) / ValidNum
+        AVERAGE = sum(COLUMN_DATA) / VALIDNUM
     except ZeroDivisionError:
         print("Error: There were no valid number(s) in column {} in file: {}"
-              .format(column_number, data_file))
+              .format(column_to_parse, input_file_name))
         sys.exit()
         
-    print("{:<4} {}".format("Column:", COLUMN_NUMBER))
-    print("{:<10}{}{:>10.3f}".format("Count", "=", Count))
-    print("{:<10}{}{:>10.3f}".format("ValidNum", "=", ValidNum))
-    print("{:<10}{}{:>10.3f}".format("Average", "=", Average))
+    print("{:<4} {}".format("Column:", column_to_parse))
+    print("{:<10}{}{:>10.3f}".format("Count", "=", COUNT))
+    print("{:<10}{}{:>10.3f}".format("ValidNum", "=", VALIDNUM))
+    print("{:<10}{}{:>10.3f}".format("Average", "=", AVERAGE))
 
 
 def min_max():
@@ -101,7 +108,7 @@ if __name__ == "__main__":
 
     
     iterate()
-    count_validnum_average()
+    count_average()
     min_max()
     variance_stddev()
     statistics()
