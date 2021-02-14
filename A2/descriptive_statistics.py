@@ -69,21 +69,21 @@ if __name__ == "__main__":
                 nan.append(value)
                 removed_value += 1
             else:
-                column_data.append(float(value))
+                COLUMN_DATA.append(float(value))
         except ValueError:
             print("Skipping line number {} : could not convert string to float: '{}'"
                   .format(index + 1, value))
             removed_value += 1
 
     # Calculating length of total column
-    Count = len(column_data) + removed_value
+    Count = len(COLUMN_DATA) + removed_value
 
     # Calculating length of valid Numbers
-    ValidNum = len(column_data)
+    ValidNum = len(COLUMN_DATA)
 
     #Calculating Average
     try:
-        Average = sum(column_data) / ValidNum
+        Average = sum(COLUMN_DATA) / ValidNum
     except ZeroDivisionError:
         print("Error: There were no valid number(s) in column {} in file: {}"
               .format(COLUMN_NUMBER, DATA_FILE))
