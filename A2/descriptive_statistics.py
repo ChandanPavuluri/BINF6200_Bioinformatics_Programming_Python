@@ -5,6 +5,61 @@ Descriptive Statistics and Lists
 import sys
 import math
 
+def iterate():
+
+    data_file = sys.argv[1]
+    column_number = sys.argv[2]
+
+    data = []
+    column_data = []
+    nan = []
+
+    with open(data_file) as input_file:
+        for line in input_file:
+            i = 1
+            try:
+                num = line.split("\t")[int(column_number)]
+                data.append(num)
+                i = +1
+            except IndexError:
+                print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
+                      .format(column_number, i, data_file))
+                sys.exit()
+    removed_value = 0
+    for index, value in enumerate(data):
+        try:
+            if value in ("NaN", "nan"):
+                nan.append(value)
+                removed_value += 1
+            else:
+                column_data.append(float(value))
+        except ValueError:
+            print("Skipping line number {} : could not convert string to float: '{}'"
+                  .format(index + 1, value))
+            removed_value += 1
+           
+def count_validnum_average():
+
+    # Calculating length of total column
+    Count = len(column_data) + removed_value
+
+    # Calculating length of valid Numbers
+    ValidNum = len(column_data)
+
+    #Calculating Average
+    try:
+        Average = sum(column_data) / ValidNum
+    except ZeroDivisionError:
+        print("Error: There were no valid number(s) in column {} in file: {}"
+              .format(column_number, data_file))
+        sys.exit()
+        
+    print("{:<4} {}".format("Column:", COLUMN_NUMBER))
+    print("{:<10}{}{:>10.3f}".format("Count", "=", Count))
+    print("{:<10}{}{:>10.3f}".format("ValidNum", "=", ValidNum))
+    print("{:<10}{}{:>10.3f}".format("Average", "=", Average))
+
+
 def min_max():
     """Function for identifying Maximum and Minimum number"""
     column_data.sort()
@@ -39,61 +94,14 @@ def statistics():
     print("{:<10}{}{:>10.3f}".format("Median", "=", median))
 
 if __name__ == "__main__":
-    arg_count = len(sys.argv) - 1
+    ARG_COUNT = len(sys.argv) - 1
     # if length of the argument count was less than 2 we need to raise an exception
-    if arg_count < 2:
+    if ARG_COUNT < 2:
         raise Exception("This script requires 2 arguments: Datafile name and then column number")
 
-    DATA_FILE = sys.argv[1]
-    COLUMN_NUMBER = sys.argv[2]
-
-    data = []
-    column_data = []
-    nan = []
-
-    with open(DATA_FILE) as input_file:
-        for line in input_file:
-            i = 1
-            try:
-                num = line.split("\t")[int(COLUMN_NUMBER)]
-                data.append(num)
-                i = +1
-            except IndexError:
-                print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
-                      .format(COLUMN_NUMBER, i, DATA_FILE))
-                sys.exit()
-    removed_value = 0
-    for index, value in enumerate(data):
-        try:
-            if value in ("NaN", "nan"):
-                nan.append(value)
-                removed_value += 1
-            else:
-                column_data.append(float(value))
-        except ValueError:
-            print("Skipping line number {} : could not convert string to float: '{}'"
-                  .format(index + 1, value))
-            removed_value += 1
-
-    # Calculating length of total column
-    Count = len(column_data) + removed_value
-
-    # Calculating length of valid Numbers
-    ValidNum = len(column_data)
-
-    #Calculating Average
-    try:
-        Average = sum(column_data) / ValidNum
-    except ZeroDivisionError:
-        print("Error: There were no valid number(s) in column {} in file: {}"
-              .format(COLUMN_NUMBER, DATA_FILE))
-        sys.exit()
-
-
-    print("{:<4} {}".format("Column:", COLUMN_NUMBER))
-    print("{:<10}{}{:>10.3f}".format("Count", "=", Count))
-    print("{:<10}{}{:>10.3f}".format("ValidNum", "=", ValidNum))
-    print("{:<10}{}{:>10.3f}".format("Average", "=", Average))
+    
+    iterate()
+    count_validnum_average()
     min_max()
     variance_stddev()
     statistics()
