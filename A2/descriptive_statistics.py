@@ -26,7 +26,6 @@ def min_max():
 def variance_stddev():
     """Function for calculating Variance and Standard Deviation"""
 
-
     #creating an empty list
     var = []
 
