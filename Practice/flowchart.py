@@ -11,6 +11,6 @@ for line in FASTA:
         line = line.replace('\n', '')
         Seq.append(line)
 
-for i, seq in enumerate(Seq):
+for i, seq in zip(headers,Seq):
     length = len(seq)
-    print(headers[i], length)
+    print(i, length)
