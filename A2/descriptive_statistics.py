@@ -5,68 +5,6 @@ Descriptive Statistics and Lists
 import sys
 import math
 
-def iterate():
-
-    input_file_name = sys.argv[1]
-    column_to_parse = sys.argv[2]
-
-    global DATA
-    global COLUMN_DATA
-    global NAN 
-
-    DATA = []
-    COLUMN_DATA = []
-    NAN =[]
-    with open(input_file_name) as input_file:
-        for line in input_file:
-            i = 1
-            try:
-                num = line.split("\t")[int(column_to_parse)]
-                DATA.append(num)
-                i = +1
-            except IndexError:
-                print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
-                      .format(column_to_parse, i, input_file_name))
-                sys.exit()
-    global REMOVED_VALUE
-    REMOVED_VALUE = 0
-    for index, value in enumerate(DATA):
-        try:
-            if value in ("NaN", "nan"):
-                NAN.append(value)
-                REMOVED_VALUE += 1
-            else:
-                COLUMN_DATA.append(float(value))
-        except ValueError:
-            print("Skipping line number {} : could not convert string to float: '{}'"
-                  .format(index + 1, value))
-            REMOVED_VALUE += 1
-
-def count_average():
-
-    # Calculating length of total column
-    global COUNT
-    COUNT = len(COLUMN_DATA) + REMOVED_VALUE
-
-    # Calculating length of valid Numbers
-    global VALIDNUM
-    VALIDNUM = len(COLUMN_DATA)
-
-    #Calculating Average
-    global AVERAGE
-    try:
-        AVERAGE = sum(COLUMN_DATA) / VALIDNUM
-    except ZeroDivisionError:
-        print("Error: There were no valid number(s) in column {} in file: {}"
-              .format(column_to_parse, input_file_name))
-        sys.exit()
-        
-    print("{:<4} {}".format("Column:", column_to_parse))
-    print("{:<10}{}{:>10.3f}".format("Count", "=", COUNT))
-    print("{:<10}{}{:>10.3f}".format("ValidNum", "=", VALIDNUM))
-    print("{:<10}{}{:>10.3f}".format("Average", "=", AVERAGE))
-
-
 def min_max():
     """Function for identifying Maximum and Minimum number"""
     column_data.sort()
@@ -101,14 +39,61 @@ def statistics():
     print("{:<10}{}{:>10.3f}".format("Median", "=", median))
 
 if __name__ == "__main__":
-    ARG_COUNT = len(sys.argv) - 1
+    arg_count = len(sys.argv) - 1
     # if length of the argument count was less than 2 we need to raise an exception
-    if ARG_COUNT < 2:
+    if arg_count < 2:
         raise Exception("This script requires 2 arguments: Datafile name and then column number")
 
-    
-    iterate()
-    count_average()
+    INPUT_DATA_FILE = sys.argv[1]
+    COLUMN_NUMBER = sys.argv[2]
+
+    DATA = []
+    COLUMN_DATA = []
+    NAN = []
+
+    with open(INPUT_DATA_FILE) as input_file:
+        for line in input_file:
+            i = 1
+            try:
+                num = line.split("\t")[int(COLUMN_NUMBER)]
+                data.append(num)
+                i = +1
+            except IndexError:
+                print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
+                      .format(COLUMN_NUMBER, i, INPUT_DATA_FILE))
+                sys.exit()
+    removed_value = 0
+    for index, value in enumerate(DATA):
+        try:
+            if value in ("NaN", "nan"):
+                nan.append(value)
+                removed_value += 1
+            else:
+                column_data.append(float(value))
+        except ValueError:
+            print("Skipping line number {} : could not convert string to float: '{}'"
+                  .format(index + 1, value))
+            removed_value += 1
+
+    # Calculating length of total column
+    Count = len(column_data) + removed_value
+
+    # Calculating length of valid Numbers
+    ValidNum = len(column_data)
+
+    #Calculating Average
+    try:
+        Average = sum(column_data) / ValidNum
+    except ZeroDivisionError:
+        print("Error: There were no valid number(s) in column {} in file: {}"
+              .format(COLUMN_NUMBER, DATA_FILE))
+        sys.exit()
+
+
+    print("{:<4} {}".format("Column:", COLUMN_NUMBER))
+    print("{:<10}{}{:>10.3f}".format("Count", "=", Count))
+    print("{:<10}{}{:>10.3f}".format("ValidNum", "=", ValidNum))
+    print("{:<10}{}{:>10.3f}".format("Average", "=", Average))
     min_max()
     variance_stddev()
     statistics()
