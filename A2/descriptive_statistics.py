@@ -20,8 +20,8 @@ def min_max():
     maximum = COLUMN_DATA[-1]
 
     #Printing maximum and minumum values
-    print("{:<10}{}{:>10.3f}".format("Maximum", "=", maximum))
-    print("{:<10}{}{:>10.3f}".format("Minimum", "=", minimum))
+    print("{:<8} {} {:>8.3f}".format("Maximum", "=", maximum))
+    print("{:<8} {} {:>8.3f}".format("Minimum", "=", minimum))
 
 def variance_stddev():
     """Function for calculating Variance and Standard Deviation"""
@@ -38,13 +38,13 @@ def variance_stddev():
         variance = 0
 
     #printing Variance of data
-    print("{:<10}{}{:>10.3f}".format("Variance", "=", variance))
+    print("{:<8} {} {:>8.3f}".format("Variance", "=", variance))
 
     #Calculating Standard Deviation
     std_dev = math.sqrt(variance)
 
     #printng Standard Deviation of data
-    print("{:<10}{}{:>10.3f}".format("Std_Dev", "=", std_dev))
+    print("{:<8} {} {:>8.3f}".format("Std_Dev", "=", std_dev))
 
 def statistics():
     """Function for calculating Median"""
@@ -61,7 +61,7 @@ def statistics():
         median = COLUMN_DATA[len(COLUMN_DATA) // 2]
 
     #printing median of data
-    print("{:<10}{}{:>10.3f}".format("Median", "=", median))
+    print("{:<8} {} {:>8.3f}".format("Median", "=", median))
 
 if __name__ == "__main__":
 
@@ -126,9 +126,9 @@ if __name__ == "__main__":
 
     #Final output print statements
     print("{:<4} {}".format("Column:", COLUMN_NUMBER))
-    print("{:<10}{}{:>10.3f}".format("Count", "=", COUNT))
-    print("{:<10}{}{:>10.3f}".format("ValidNum", "=", VALIDNUM))
-    print("{:<10}{}{:>10.3f}".format("Average", "=", AVERAGE))
+    print("{:<8} {} {:>8.3f}".format("Count", "=", COUNT))
+    print("{:<8} {} {:>8.3f}".format("ValidNum", "=", VALIDNUM))
+    print("{:<8} {} {:>8.3f}".format("Average", "=", AVERAGE))
     min_max()
     variance_stddev()
     statistics()
