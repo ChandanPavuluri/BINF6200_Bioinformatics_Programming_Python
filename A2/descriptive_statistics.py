@@ -117,7 +117,7 @@ def statistics():
 
 if __name__ == "__main__":
 
-    #calculating length of argumnets while executing the file
+    #calculating length of arguments while executing the file
     ARG_COUNT = len(sys.argv) - 1
 
     # if length of the argument count was less than 2 we need to raise an exception
