@@ -11,7 +11,7 @@ import math
 INPUT_DATA_FILE = sys.argv[1]
 COLUMN_NUMBER = sys.argv[2]
 
-# Creating empty lists for required data and not a numbers extraction
+# Creating empty lists for required data and "NAN" numbers extraction
 DATA = []
 COLUMN_DATA = []
 NAN = []
@@ -29,10 +29,11 @@ with open(INPUT_DATA_FILE) as input_file:
                   .format(COLUMN_NUMBER, i, INPUT_DATA_FILE))
             sys.exit()
 
-# Removing the non numeric values from the required data and converting the values to float
-# and appending to a new list
+#Initializing a vriable for counting the number of removed values
 REMOVED_VALUE = 0
 
+# Removing the non numeric values from the required data and converting the values to float
+# and appending to a new list
 for index, value in enumerate(DATA):
     try:
         if value in ("NaN", "nan"):
@@ -59,7 +60,7 @@ except ZeroDivisionError:
           .format(COLUMN_NUMBER, INPUT_DATA_FILE))
     sys.exit()
 
-def min_max():
+def minimum_maximum():
     """Function for identifying Maximum and Minimum number"""
 
     #sorting the list in ascending order
@@ -129,6 +130,6 @@ if __name__ == "__main__":
     print("{:<8} {} {:>8.3f}".format("Count", "=", COUNT))
     print("{:<8} {} {:>8.3f}".format("ValidNum", "=", VALIDNUM))
     print("{:<8} {} {:>8.3f}".format("Average", "=", AVERAGE))
-    min_max()
+    minimum_maximum()
     variance_stddev()
     statistics()
