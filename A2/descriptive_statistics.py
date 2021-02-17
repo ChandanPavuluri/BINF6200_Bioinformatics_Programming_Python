@@ -7,57 +7,73 @@ Descriptive Statistics and Lists
 import sys
 import math
 
-# Arguments needed while executing
-INPUT_DATA_FILE = sys.argv[1]
-COLUMN_NUMBER = sys.argv[2]
+def parser_filter():
 
-# Creating empty lists for required data and not a numbers extraction
-DATA = []
-COLUMN_DATA = []
-NAN = []
+    INPUT_DATA_FILE = sys.argv[1]
+    COLUMN_NUMBER = sys.argv[2]
 
-# Opening and reading the inputfile and extracting the required data
-with open(INPUT_DATA_FILE) as input_file:
-    for line in input_file:
-        i = 1
+    DATA = []
+    global COLUMN_DATA
+    COLUMN_DATA = []
+    NAN = []
+
+    # Opening and reading the inputfile and extracting the required data
+    with open(INPUT_DATA_FILE) as input_file:
+        for line in input_file:
+            i = 1
+            try:
+                num = line.split("\t")[int(COLUMN_NUMBER)]
+                DATA.append(num)
+                i = +1
+            except IndexError:
+                print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
+                        .format(COLUMN_NUMBER, i, INPUT_DATA_FILE))
+                sys.exit()
+
+        # Removing the non numeric values from the required data and converting the values to float
+        # and appending to a new list
+    global REMOVED_VALUE
+    REMOVED_VALUE = 0
+    for index, value in enumerate(DATA):
         try:
-            num = line.split("\t")[int(COLUMN_NUMBER)]
-            DATA.append(num)
-            i = +1
-        except IndexError:
-            print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
-                  .format(COLUMN_NUMBER, i, INPUT_DATA_FILE))
-            sys.exit()
-
-# Removing the non numeric values from the required data and converting the values to float
-# and appending to a new list
-REMOVED_VALUE = 0
-
-for index, value in enumerate(DATA):
-    try:
-        if value in ("NaN", "nan"):
-            NAN.append(value)
+            if value in ("NaN", "nan"):
+                NAN.append(value)
+                REMOVED_VALUE += 1
+            else:
+                COLUMN_DATA.append(float(value))
+        except ValueError:
+            print("Skipping line number {} : could not convert string to float: '{}'"
+                    .format(index + 1, value))
             REMOVED_VALUE += 1
-        else:
-            COLUMN_DATA.append(float(value))
-    except ValueError:
-        print("Skipping line number {} : could not convert string to float: '{}'"
-              .format(index + 1, value))
-        REMOVED_VALUE += 1
 
-# Calculating length of total column
-COUNT = len(COLUMN_DATA) + REMOVED_VALUE
+    #Calling the functions
+    print("{:<4} {}".format("Column:", COLUMN_NUMBER))
 
-# Calculating length of only numerical values
-VALIDNUM = len(COLUMN_DATA)
 
-# Calculating Average of the data
-try:
-    AVERAGE = sum(COLUMN_DATA) / VALIDNUM
-except ZeroDivisionError:
-    print("Error: There were no valid number(s) in column {} in file: {}"
-          .format(COLUMN_NUMBER, INPUT_DATA_FILE))
-    sys.exit()
+
+def statistics():
+    """Function for calculating Statistics of the data"""
+
+    # Calculating length of total column
+    global COUNT
+    COUNT = len(COLUMN_DATA) + REMOVED_VALUE
+
+    # Calculating length of only numerical values
+    global VALIDNUM
+    VALIDNUM = len(COLUMN_DATA)
+
+    # Calculating Average of the data
+    global AVERAGE
+    try:
+        AVERAGE = sum(COLUMN_DATA) / VALIDNUM
+    except ZeroDivisionError:
+        print("Error: There were no valid number(s) in column {} in file: {}"
+            .format(COLUMN_NUMBER, INPUT_DATA_FILE))
+        sys.exit()
+
+    print("{:<8} {} {:>8.3f}".format("Count", "=", COUNT))
+    print("{:<8} {} {:>8.3f}".format("ValidNum", "=", VALIDNUM))
+    print("{:<8} {} {:>8.3f}".format("Average", "=", AVERAGE))
 
 def min_max():
     """Function for identifying Maximum and Minimum number"""
@@ -98,7 +114,7 @@ def variance_stddev():
     #printng Standard Deviation of data
     print("{:<8} {} {:>8.3f}".format("Std_Dev", "=", std_dev))
 
-def statistics():
+def median():
     """Function for calculating Median"""
 
     #sorting the list in ascending order
@@ -121,14 +137,12 @@ if __name__ == "__main__":
     ARG_COUNT = len(sys.argv) - 1
 
     # if length of the argument count was less than 2 we need to raise an exception
-    if ARG_COUNT < 2:
+    if ((ARG_COUNT < 2) or (ARG_COUNT > 2)):
         raise Exception("This script requires 2 arguments: Datafile name and then column number")
-
-    #Final output print statements
-    print("{:<4} {}".format("Column:", COLUMN_NUMBER))
-    print("{:<8} {} {:>8.3f}".format("Count", "=", COUNT))
-    print("{:<8} {} {:>8.3f}".format("ValidNum", "=", VALIDNUM))
-    print("{:<8} {} {:>8.3f}".format("Average", "=", AVERAGE))
-    min_max()
-    variance_stddev()
-    statistics()
+    else:
+        # Calling the functions
+        parser_filter()
+        statistics()
+        min_max()
+        variance_stddev()
+        median()
