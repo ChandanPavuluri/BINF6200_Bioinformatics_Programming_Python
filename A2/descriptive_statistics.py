@@ -7,6 +7,7 @@ Descriptive Statistics and Lists
 import sys
 import math
 
+
 def parser_filter():
 
     INPUT_DATA_FILE = sys.argv[1]
@@ -44,7 +45,6 @@ def parser_filter():
         except ValueError:
             print("Skipping line number {} : could not convert string to float: '{}'"
                     .format(index + 1, value))
-            REMOVED_VALUE += 1
 
     #Calling the functions
     print("{:<4} {}".format("Column:", COLUMN_NUMBER))
@@ -75,7 +75,7 @@ def statistics():
     print("{:<8} {} {:>8.3f}".format("ValidNum", "=", VALIDNUM))
     print("{:<8} {} {:>8.3f}".format("Average", "=", AVERAGE))
 
-def min_max():
+def minimum_maximum():
     """Function for identifying Maximum and Minimum number"""
 
     #sorting the list in ascending order
