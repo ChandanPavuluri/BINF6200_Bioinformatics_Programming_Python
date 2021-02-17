@@ -140,7 +140,7 @@ if __name__ == "__main__":
     if ((ARG_COUNT < 2) or (ARG_COUNT > 2)):
         raise Exception("This script requires 2 arguments: Datafile name and then column number")
     else:
-        # Calling the functions
+        # Calling the required functions
         parser_filter()
         statistics()
         min_max()
