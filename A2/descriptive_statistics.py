@@ -3,10 +3,8 @@ Descriptive Statistics and Lists
 #descriptive_statistics.py
 """
 #importing required modules(sys and math)
-
 import sys
 import math
-
 
 
 def minimum_maximum():
@@ -48,7 +46,8 @@ def variance_stddev():
     #printng Standard Deviation of data
     print("{:<8} {} {:>8.3f}".format("Std_Dev", "=", std_dev))
 
-def statistics():
+
+def middle_value():
     """Function for calculating Median"""
 
     #sorting the list in ascending order
@@ -56,9 +55,9 @@ def statistics():
 
     # Finding the position of the median
     if len(COLUMN_DATA) % 2 == 0:
-        first_value = COLUMN_DATA[len(COLUMN_DATA) // 2]
-        second_value = COLUMN_DATA[len(COLUMN_DATA) // 2 - 1]
-        median = (first_value + second_value) / 2
+        first_middle_value = COLUMN_DATA[len(COLUMN_DATA) // 2]
+        second_middle_value = COLUMN_DATA[len(COLUMN_DATA) // 2 - 1]
+        median = (first_middle_value + second_middle_value) / 2
     else:
         median = COLUMN_DATA[len(COLUMN_DATA) // 2]
 
@@ -70,7 +69,8 @@ if __name__ == "__main__":
     #calculating length of arguments while executing the file
     ARG_COUNT = len(sys.argv) - 1
 
-    # if length of the argument count was less than 2 we need to raise an exception
+
+    # if length of the argument count was less than 2 then raise an exception
     if ARG_COUNT < 2:
         raise Exception("This script requires 2 arguments: Datafile name and then column number")
     # Arguments needed while executing
@@ -82,7 +82,8 @@ if __name__ == "__main__":
     COLUMN_DATA = []
     NAN = []
 
-    # Opening and reading the inputfile and extracting the required data
+
+    # Opening and reading the input file and extracting the required data
     with open(INPUT_DATA_FILE) as input_file:
         for line in input_file:
             i = 1
@@ -130,6 +131,7 @@ if __name__ == "__main__":
     print("{:<8} {} {:>8.3f}".format("Count", "=", COUNT))
     print("{:<8} {} {:>8.3f}".format("ValidNum", "=", VALIDNUM))
     print("{:<8} {} {:>8.3f}".format("Average", "=", AVERAGE))
+    #Calling the functions
     minimum_maximum()
     variance_stddev()
-    statistics()
+    middle_value()
