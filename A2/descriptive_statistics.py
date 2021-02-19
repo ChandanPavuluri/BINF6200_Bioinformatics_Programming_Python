@@ -48,6 +48,7 @@ def variance_stddev():
     #printng Standard Deviation of data
     print("{:<8} {} {:>8.3f}".format("Std_Dev", "=", std_dev))
 
+
 def middle_value():
     """Function for calculating Median"""
 
@@ -70,6 +71,7 @@ if __name__ == "__main__":
     #calculating length of arguments while executing the file
     ARG_COUNT = len(sys.argv) - 1
 
+
     # if length of the argument count was less than 2 then raise an exception
     if ARG_COUNT < 2:
         raise Exception("This script requires 2 arguments: Datafile name and then column number")
@@ -81,6 +83,7 @@ if __name__ == "__main__":
     DATA = []
     COLUMN_DATA = []
     NAN = []
+
 
     # Opening and reading the input file and extracting the required data
     with open(INPUT_DATA_FILE) as input_file:
