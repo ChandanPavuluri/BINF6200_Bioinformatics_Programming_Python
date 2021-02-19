@@ -1,4 +1,5 @@
 """
+#!/usr/bin/env python3
 Descriptive Statistics and Lists
 #descriptive_statistics.py
 """
@@ -19,7 +20,7 @@ def minimum_maximum():
     #selecting the last value- maximum value
     maximum = COLUMN_DATA[-1]
 
-    #Printing maximum and minumum values
+    #Printing maximum and minimum values
     print("{:<8} {} {:>8.3f}".format("Maximum", "=", maximum))
     print("{:<8} {} {:>8.3f}".format("Minimum", "=", minimum))
 
@@ -34,6 +35,7 @@ def variance_stddev():
         var.append((number - AVERAGE) ** 2)
     try:
         variance = sum(var) / (VALIDNUM - 1)
+    # If divided by zero or numerator Zero
     except ZeroDivisionError:
         variance = 0
 
@@ -88,23 +90,25 @@ if __name__ == "__main__":
                 num = line.split("\t")[int(COLUMN_NUMBER)]
                 DATA.append(num)
                 i = +1
+            # If the column number entered is invalid then except the error
             except IndexError:
                 print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
                       .format(COLUMN_NUMBER, i, INPUT_DATA_FILE))
                 sys.exit()
 
-    #Initializing a vriable for counting the number of removed values
+    #Initializing a variable for counting the number of removed values
     REMOVED_VALUE = 0
 
     # Removing the non numeric values from the required data and converting the values to float
     # and appending to a new list
     for index, value in enumerate(DATA):
         try:
-            if value in ("NaN", "nan"):
+            if value in ("NaN", "nan", "NAN"):
                 NAN.append(value)
                 REMOVED_VALUE += 1
             else:
                 COLUMN_DATA.append(float(value))
+        # if the value is other than numerical or nan then expect value error.
         except ValueError:
             print("Skipping line number {} : could not convert string to float: '{}'"
                   .format(index + 1, value))
@@ -124,7 +128,9 @@ if __name__ == "__main__":
               .format(COLUMN_NUMBER, INPUT_DATA_FILE))
         sys.exit()
     #Final output print statements
+    print()
     print("{:<4} {}".format("Column:", COLUMN_NUMBER))
+    print("\n")
     print("{:<8} {} {:>8.3f}".format("Count", "=", COUNT))
     print("{:<8} {} {:>8.3f}".format("ValidNum", "=", VALIDNUM))
     print("{:<8} {} {:>8.3f}".format("Average", "=", AVERAGE))
