@@ -1,143 +1,147 @@
 """
-#!/usr/bin/env python3
 Descriptive Statistics and Lists
 #descriptive_statistics.py
 """
-#importing required modules(sys and math)
+# importing required modules(sys and math)
 import sys
 import math
 
 
-def minimum_maximum():
-    """Function for identifying Maximum and Minimum number"""
+def main():
+    """ parsing and cleaning the data"""
 
-    #sorting the list in ascending order
-    COLUMN_DATA.sort()
-
-    #selecting first value- minimum value
-    minimum = COLUMN_DATA[0]
-
-    #selecting the last value- maximum value
-    maximum = COLUMN_DATA[-1]
-
-    #Printing maximum and minimum values
-    print("{:<8} {} {:>8.3f}".format("Maximum", "=", maximum))
-    print("{:<8} {} {:>8.3f}".format("Minimum", "=", minimum))
-
-def variance_stddev():
-    """Function for calculating Variance and Standard Deviation"""
-
-    #creating an empty list
-    var = []
-
-    #Calculating Variance
-    for number in COLUMN_DATA:
-        var.append((number - AVERAGE) ** 2)
-    try:
-        variance = sum(var) / (VALIDNUM - 1)
-    # If divided by zero or numerator Zero
-    except ZeroDivisionError:
-        variance = 0
-
-    #printing Variance of data
-    print("{:<8} {} {:>8.3f}".format("Variance", "=", variance))
-
-    #Calculating Standard Deviation
-    std_dev = math.sqrt(variance)
-
-    #printng Standard Deviation of data
-    print("{:<8} {} {:>8.3f}".format("Std_Dev", "=", std_dev))
-
-
-def middle_value():
-    """Function for calculating Median"""
-
-    #sorting the list in ascending order
-    COLUMN_DATA.sort()
-
-    # Finding the position of the median
-    if len(COLUMN_DATA) % 2 == 0:
-        first_middle_value = COLUMN_DATA[len(COLUMN_DATA) // 2]
-        second_middle_value = COLUMN_DATA[len(COLUMN_DATA) // 2 - 1]
-        median = (first_middle_value + second_middle_value) / 2
-    else:
-        median = COLUMN_DATA[len(COLUMN_DATA) // 2]
-
-    #printing median of data
-    print("{:<8} {} {:>8.3f}".format("Median", "=", median))
-
-if __name__ == "__main__":
-
-    #calculating length of arguments while executing the file
-    ARG_COUNT = len(sys.argv) - 1
-
+    # calculating length of arguments while executing the file
+    arg_count = len(sys.argv) - 1
 
     # if length of the argument count was less than 2 then raise an exception
-    if ARG_COUNT < 2:
+    if arg_count < 2:
         raise Exception("This script requires 2 arguments: Datafile name and then column number")
     # Arguments needed while executing
-    INPUT_DATA_FILE = sys.argv[1]
-    COLUMN_NUMBER = sys.argv[2]
+    input_datafile = sys.argv[1]
+    column_number = sys.argv[2]
 
     # Creating empty lists for required data and "NAN" numbers extraction
-    DATA = []
-    COLUMN_DATA = []
-    NAN = []
-
+    data = []
+    column_data = []
+    non_numeric = []
 
     # Opening and reading the input file and extracting the required data
-    with open(INPUT_DATA_FILE) as input_file:
+    with open(input_datafile) as input_file:
         for line in input_file:
             i = 1
             try:
-                num = line.split("\t")[int(COLUMN_NUMBER)]
-                DATA.append(num)
+                num = line.split("\t")[int(column_number)]
+                data.append(num)
                 i = +1
             # If the column number entered is invalid then except the error
             except IndexError:
                 print("Exiting: There is no valid 'list index' in column {} in line {} in file: {}"
-                      .format(COLUMN_NUMBER, i, INPUT_DATA_FILE))
+                      .format(column_number, i, input_datafile))
                 sys.exit()
 
-    #Initializing a variable for counting the number of removed values
-    REMOVED_VALUE = 0
+    # Initializing a variable for counting the number of removed values
+    removed_value = 0
 
     # Removing the non numeric values from the required data and converting the values to float
     # and appending to a new list
-    for index, value in enumerate(DATA):
+    for index, value in enumerate(data):
         try:
-            if value in ("NaN", "nan", "NAN"):
-                NAN.append(value)
-                REMOVED_VALUE += 1
+            if math.isnan(float(value)):
+                non_numeric.append(value)
+                removed_value += 1
             else:
-                COLUMN_DATA.append(float(value))
+                column_data.append(float(value))
         # if the value is other than numerical or nan then expect value error.
         except ValueError:
             print("Skipping line number {} : could not convert string to float: '{}'"
                   .format(index + 1, value))
-            REMOVED_VALUE += 1
+            removed_value += 1
 
     # Calculating length of total column
-    COUNT = len(COLUMN_DATA) + REMOVED_VALUE
+    count = len(column_data) + removed_value
 
     # Calculating length of only numerical values
-    VALIDNUM = len(COLUMN_DATA)
+    valid_number = len(column_data)
 
     # Calculating Average of the data
     try:
-        AVERAGE = sum(COLUMN_DATA) / VALIDNUM
+        average = sum(column_data) / valid_number
     except ZeroDivisionError:
         print("Error: There were no valid number(s) in column {} in file: {}"
-              .format(COLUMN_NUMBER, INPUT_DATA_FILE))
+              .format(column_number, input_datafile))
         sys.exit()
-    #Final output print statements
+    # Final output print statements
     print()
-    print("{:<4} {}".format("Column:", COLUMN_NUMBER))
+    print("\t{:<4} {}".format("Column:", column_number))
     print("\n")
-    print("{:<8} {} {:>8.3f}".format("Count", "=", COUNT))
-    print("{:<8} {} {:>8.3f}".format("ValidNum", "=", VALIDNUM))
-    print("{:<8} {} {:>8.3f}".format("Average", "=", AVERAGE))
-    #Calling the functions
-    minimum_maximum()
-    variance_stddev()
-    middle_value()
+    print("\t\t{:<8} {} {:>8.3f}".format("Count", "=", count))
+    print("\t\t{:<8} {} {:>8.3f}".format("ValidNum", "=", valid_number))
+    print("\t\t{:<8} {} {:>8.3f}".format("Average", "=", average))
+    # Calling the functions
+    minimum_maximum(column_data)
+    variance_stddev(column_data, valid_number, average)
+    middle_value(column_data)
+
+
+def minimum_maximum(column_data):
+    """Function for identifying Maximum and Minimum number"""
+
+    # sorting the list in ascending order
+    column_data.sort()
+
+    # selecting first value- minimum value
+    minimum = column_data[0]
+
+    # selecting the last value- maximum value
+    maximum = column_data[-1]
+
+    # Printing maximum and minimum values
+    print("\t\t{:<8} {} {:>8.3f}".format("Maximum", "=", maximum))
+    print("\t\t{:<8} {} {:>8.3f}".format("Minimum", "=", minimum))
+
+
+def variance_stddev(column_data, valid_number, average):
+    """Function for calculating Variance and Standard Deviation"""
+
+    # creating an empty list
+    var = []
+
+    # Calculating Variance
+    for number in column_data:
+        var.append((number - average) ** 2)
+    try:
+        variance = sum(var) / (valid_number - 1)
+    # If divided by zero or numerator Zero
+    except ZeroDivisionError:
+        variance = 0
+
+    # printing Variance of data
+    print("\t\t{:<8} {} {:>8.3f}".format("Variance", "=", variance))
+
+    # Calculating Standard Deviation
+    std_dev = math.sqrt(variance)
+
+    # printing Standard Deviation of data
+    print("\t\t{:<8} {} {:>8.3f}".format("Std_Dev", "=", std_dev))
+
+
+def middle_value(column_data):
+    """Function for calculating Median"""
+
+    # sorting the list in ascending order
+    column_data.sort()
+
+    # Finding the position of the median
+    if len(column_data) % 2 == 0:
+        first_middle_value = column_data[len(column_data) // 2]
+        second_middle_value = column_data[len(column_data) // 2 - 1]
+        median = (first_middle_value + second_middle_value) / 2
+    else:
+        median = column_data[len(column_data) // 2]
+
+    # printing median of data
+    print("\t\t{:<8} {} {:>8.3f}".format("Median", "=", median))
+
+
+if __name__ == "__main__":
+    main()
