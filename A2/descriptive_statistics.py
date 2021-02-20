@@ -20,10 +20,9 @@ def main():
     input_datafile = sys.argv[1]
     column_number = sys.argv[2]
 
-    # Creating empty lists for required data and "NAN" numbers extraction
+    # Creating empty lists for required data
     data = []
     column_data = []
-    non_numeric = []
 
     # Opening and reading the input file and extracting the required data
     with open(input_datafile) as input_file:
@@ -47,7 +46,6 @@ def main():
     for index, value in enumerate(data):
         try:
             if math.isnan(float(value)):
-                non_numeric.append(value)
                 removed_value += 1
             else:
                 column_data.append(float(value))
@@ -72,7 +70,7 @@ def main():
         sys.exit()
     # Final output print statements
     print()
-    print("\t{:<4} {}".format("Column:", column_number))
+    print("\t{} {}".format("Column:", column_number))
     print("\n")
     print("\t\t{:<8} {} {:>8.3f}".format("Count", "=", count))
     print("\t\t{:<8} {} {:>8.3f}".format("ValidNum", "=", valid_number))
