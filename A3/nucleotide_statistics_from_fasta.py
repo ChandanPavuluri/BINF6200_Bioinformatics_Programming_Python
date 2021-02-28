@@ -19,9 +19,9 @@ def get_fh(file, read_write):
     try:
         return open(file, read_write)
     except IOError:
-        raise Exception("Error file doesn't exist")
+        raise IOError from None
     except ValueError:
-        raise Exception("Error wrong open mode entered it should be r or w")
+        raise ValueError
 
 
 def get_header_and_sequence_lists(input_file):

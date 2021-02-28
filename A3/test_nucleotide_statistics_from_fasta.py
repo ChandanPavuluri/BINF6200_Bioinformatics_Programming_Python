@@ -13,8 +13,8 @@ def test_get_header_and_sequence_lists():
     fh_in = get_fh("test.txt", "r")
     assert get_header_and_sequence_lists(fh_in) == (['>1 sequence'], ['ATGCTAGCTA'])
 
-def test_print_sequence_stats(():
+def test_print_sequence_stats():
     fh_in = get_fh("test.txt", "r")
     list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
-    fh_out = get_fh(args.OUTFILE, "w")
+    fh_out = get_fh("output.txt", "w")
     print_sequence_stats(list_headers, list_seqs, fh_out) == (["1", "1", "3", "2", "2", "3", "0", "10", "40.0"])
