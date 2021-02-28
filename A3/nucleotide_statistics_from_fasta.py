@@ -75,7 +75,7 @@ def print_sequence_stats(headers, seqs, output):
                       str(num_t), str(num_n), str(length), str(gc_content)]
         print('\t'.join(statistics) + '\n')
         output.write('\t'.join(statistics) + '\n')
-    print(statistics)
+    return statistics
 
 
 def _get_nt_occurrence(nt_base, sequence):
