@@ -1,5 +1,5 @@
 import pytest
-from pdb_fasta_splitter import get_fh , get_header_and_sequence_lists,
+from pdb_fasta_splitter import get_fh, get_header_and_sequence_lists
 
 
 def test_get_fh_4_IOError():
@@ -9,6 +9,6 @@ def test_get_fh_4_IOError():
         get_fh("does_not_exist.txt", "r")
 
 
-def test_get_header_and_sequence_lists(input_file):
+def test_get_header_and_sequence_lists():
     fh_in = get_fh("test.txt", "r")
-    assert_get_header_and_sequence_lists(fh_in) == [],[]
+    assert get_header_and_sequence_lists(fh_in) == (['>Header'], ['ATGCTAGRTA'])

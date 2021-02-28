@@ -18,7 +18,7 @@ def get_fh(input_file, read_write):
     try:
         return open(input_file, read_write)
     except IOError:
-        raise Exception("Error file doesn't exist")
+        raise IOError
     except ValueError:
         raise Exception("Error wrong open mode entered it should be r or w")
 
