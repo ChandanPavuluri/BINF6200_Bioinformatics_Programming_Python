@@ -24,13 +24,13 @@ def get_fh(file, read_write):
         raise Exception("Error wrong open mode entered it should be r or w")
 
 
-def get_header_and_sequence_lists(input):
+def get_header_and_sequence_lists(input_file):
     headers = []
     seqs = []
     seq_lines = ""
-    with input as filehandle:
-        for line in filehandle:
-            if re.search("^>", line):
+    with input_file as file_handle:
+        for line in file_handle:
+            if re.search(r"^>", line):
                 line = line.replace('\n', "")
 
                 headers.append(line)
@@ -39,7 +39,7 @@ def get_header_and_sequence_lists(input):
             elif re.search(r"[A-Z][\s]", line):
                 line = line.replace('\n', "")
                 seq_lines = seq_lines + line
-        if len(seq_lines) > 1:
+        if len(seq_lines) > 0:
             seqs.append(seq_lines)
 
         seqs.pop(0)
@@ -76,9 +76,10 @@ def print_sequence_stats(headers, seqs, output):
         print('\t'.join(statistics) + '\n')
         output.write('\t'.join(statistics) + '\n')
 
-def _get_nt_occurrence(nt_base,sequence):
+
+def _get_nt_occurrence(nt_base, sequence):
     count = 0
-    bases= ["A","G","T","C","N"]
+    bases = ["A", "G", "T", "C", "N"]
     if nt_base in bases:
         for nucleotides in sequence:
             if nt_base in nucleotides:
@@ -88,14 +89,13 @@ def _get_nt_occurrence(nt_base,sequence):
 
     return count
 
+
 def _get_accession(header):
 
     header = header.split(" ")
     header = header[0]
     accession = re.sub(">", "", header)
     return accession
-
-
 
 
 def main():
@@ -109,4 +109,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

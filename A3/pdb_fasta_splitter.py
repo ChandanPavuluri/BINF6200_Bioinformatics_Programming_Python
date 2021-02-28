@@ -23,13 +23,13 @@ def get_fh(input_file, read_write):
         raise Exception("Error wrong open mode entered it should be r or w")
 
 
-def get_header_and_sequence_lists(input):
+def get_header_and_sequence_lists(input_file):
     headers = []
     seqs = []
     seq_lines = ""
-    with input as filehandle:
-        for line in filehandle:
-            if re.search("^>", line):
+    with input_file as file_handle:
+        for line in file_handle:
+            if re.search(r"^>", line):
                 line = line.replace('\n', "")
                 headers.append(line)
                 seqs.append(seq_lines)
@@ -37,7 +37,7 @@ def get_header_and_sequence_lists(input):
             elif re.search(r"[A-Z][\s]", line):
                 line = line.replace('\n', "")
                 seq_lines = seq_lines + line
-        if len(seq_lines) > 1:
+        if len(seq_lines) > 0:
             seqs.append(seq_lines)
 
         seqs.pop(0)
@@ -50,7 +50,7 @@ def _check_size_of_lists(headers, seqs):
     """ Check if the lists are of equal size """
     if len(headers) != len(seqs):
         sys.exit("The size of the sequences and the header lists is different \n"
-                       "Are you sure the FASTA is in correct format")
+                 "Are you sure the FASTA is in correct format")
     else:
         return True
 
