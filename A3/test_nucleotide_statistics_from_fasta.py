@@ -1,5 +1,5 @@
 import pytest
-from pdb_fasta_splitter import get_fh, get_header_and_sequence_lists, file_write
+from nucleotide_statistics_from_fasta import get_fh, get_header_and_sequence_lists, print_sequence_stats
 
 
 def test_get_fh_4_IOError():
@@ -13,7 +13,8 @@ def test_get_header_and_sequence_lists():
     fh_in = get_fh("test.txt", "r")
     assert get_header_and_sequence_lists(fh_in) == (['>1 sequence'], ['ATGCTAGCTA'])
 
-def test_file_write():
+def test_print_sequence_stats(():
     fh_in = get_fh("test.txt", "r")
     list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
-    assert file_write(list_headers, list_seqs) == (1,0)
+    fh_out = get_fh(args.OUTFILE, "w")
+    print_sequence_stats(list_headers, list_seqs, fh_out) == (["1", "1", "3", "2", "2", "3", "0", "10", "40.0"])
