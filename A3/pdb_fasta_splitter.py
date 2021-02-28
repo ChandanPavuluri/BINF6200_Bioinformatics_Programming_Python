@@ -18,9 +18,10 @@ def get_fh(input_file, read_write):
     try:
         return open(input_file, read_write)
     except IOError:
-        raise IOError
+        raise IOError from None
     except ValueError:
-        raise Exception("Error wrong open mode entered it should be r or w")
+        raise ValueError
+
 
 
 def get_header_and_sequence_lists(input_file):
@@ -54,17 +55,12 @@ def _check_size_of_lists(headers, seqs):
     else:
         return True
 
-
-def main():
-
-    args = args_parse()
-    fh_in = get_fh(args.INFILE, "r")
-    list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
+def file_write(headers,seqs):
     protein = get_fh("pdb_protein.fasta", "w")
     sec_str = get_fh("pdb_ss.fasta", "w")
     protein_length = 0
     sec_str_length = 0
-    for header, sequence in zip(list_headers, list_seqs):
+    for header, sequence in zip(headers, seqs):
         if re.search("^>.*sequence", header):
             protein.write(header)
             protein.write("\n")
@@ -81,6 +77,15 @@ def main():
     sec_str.close()
     print(f"Found {protein_length} protein sequences")
     print(f"Found {sec_str_length} ss sequences")
+    return protein_length, sec_str_length
+
+def main():
+
+    args = args_parse()
+    fh_in = get_fh(args.INFILE, "r")
+    list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
+    file_write(list_headers, list_seqs)
+
 
 
 if __name__ == "__main__":
