@@ -5,6 +5,7 @@ import argparse
 
 def main():
     """Function for calling all the functions """
+    
     args = args_parse()
     fh_in = get_fh(args.INFILE, "r")
     list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
@@ -47,9 +48,8 @@ def get_header_and_sequence_lists(input_file):
     with input_file as file_handle:
         for line in file_handle:
 
-            # if the line starts with '>' append to headers list else join the seq lines and iterate the
-            # remaining lines and keep adding to the string, after adding second header append the sequence lines
-            # to sequence list
+            # if the line starts with '>' append to headers list else join the seq lines and iterate the remaining 
+            # lines and keep adding to the string, after adding second header append the sequence lines to sequence list
             if re.search(r"^>", line):
                 line = line.replace('\n', "")
                 headers.append(line)
