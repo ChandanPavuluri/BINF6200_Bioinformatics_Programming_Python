@@ -27,8 +27,10 @@ def args_parse():
                                                  ' to get the nucleotide statistics')
 
     # adding arguments that are needed
-    parser.add_argument('-i', '--infile', dest='INFILE', help='Path to the file to open', required=True)
-    parser.add_argument('-o', '--outfile', dest='OUTFILE', help='Path to the file to write', required=True)
+    parser.add_argument('-i', '--infile', dest='INFILE', help='Path to the file to open',
+                        required=True)
+    parser.add_argument('-o', '--outfile', dest='OUTFILE', help='Path to the file to write',
+                        required=True)
 
     return parser.parse_args()
 
@@ -100,11 +102,9 @@ def print_sequence_stats(headers, seqs, output):
     # Creating variables for the index
     index = 0
 
-    # writing the header names for the txt file
-    output_header = ["Number", "Accession", "A's", "G's", "C's", "T", "N's", "Length", "GC%"]
-
     # writing the header to the output file
-    output.write('\t'.join(output_header) + '\n')
+    output.write('\t'.join(["Number", "Accession", "A's", "G's", "C's", "T", "N's", "Length",
+                            "GC%"]) + '\n')
 
     # zipped the headers and sequence lists to get the accession number and counts of the bases
     for header_string, seq in zip(headers, seqs):
@@ -128,11 +128,11 @@ def print_sequence_stats(headers, seqs, output):
         statistics = [str(index), str(accession_string), str(num_a), str(num_g), str(num_c),
                       str(num_t), str(num_n), str(length), str(gc_content)]
 
-        # printing the statistics
-        print('\t'.join(statistics) + '\n')
-
         # writing every accessions statistics to the out file
         output.write('\t'.join(statistics) + '\n')
+
+    # printing the statistics
+    # print('\t'.join(statistics) + '\n')
 
     # returning the last statistics for testing
     return statistics
