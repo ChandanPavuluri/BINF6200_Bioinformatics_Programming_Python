@@ -68,7 +68,7 @@ def get_header_and_sequence_lists(input_file):
                 line = line.replace('\n', "")
                 seq_lines = seq_lines + line
 
-    # the last sequnce line cannot be appended as there were no headers so we are appending it
+    # the last sequence line cannot be appended as there were no headers so we are appending it
     # to the sequence list
     if len(seq_lines) > 0:
         seqs.append(seq_lines)
