@@ -23,7 +23,7 @@ def args_parse():
     """Function for commandline options"""
 
     # Creating argument parser object
-    parser = argparse.ArgumentParser(description='Give the fasta sequence file name'
+    parser = argparse.ArgumentParser(description='Give the fasta sequence file name '
                                                  'to do the splitting')
 
     # adding arguments that are needed

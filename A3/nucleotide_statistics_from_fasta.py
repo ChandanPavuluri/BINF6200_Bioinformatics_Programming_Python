@@ -6,6 +6,7 @@ import argparse
 def args_parse():
     """Function for arguments"""
 
+    # Creating argument parser object
     parser = argparse.ArgumentParser(description='Give the fasta sequence file name to get the nucleotide statistics')
     parser.add_argument('-i', '--infile', dest='INFILE', help='Path to the file to open', required=True)
     parser.add_argument('-o', '--outfile', dest='OUTFILE', help='Path to the file to write', required=True)

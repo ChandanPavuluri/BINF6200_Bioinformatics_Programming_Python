@@ -3,6 +3,7 @@ from pdb_fasta_splitter import get_fh, get_header_and_sequence_lists, file_write
 
 
 def test_get_fh_4_IOError():
+    """ Test function for get_fh error"""
     # does it raise IOError
     # this should exit
     with pytest.raises(IOError):
