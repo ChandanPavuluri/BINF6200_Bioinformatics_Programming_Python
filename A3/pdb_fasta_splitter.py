@@ -1,3 +1,9 @@
+"""
+pdb_fasta_splitter.py
+#pdb_fasta_splitter.py
+"""
+
+# Importing required modules
 import re
 import sys
 import argparse
@@ -5,7 +11,7 @@ import argparse
 
 def main():
     """Function for calling all the functions """
-    
+
     args = args_parse()
     fh_in = get_fh(args.INFILE, "r")
     list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
@@ -17,10 +23,12 @@ def args_parse():
     """Function for commandline options"""
 
     # Creating argument parser object
-    parser = argparse.ArgumentParser(description='Give the fasta sequence file name to do the splitting')
+    parser = argparse.ArgumentParser(description='Give the fasta sequence file name'
+                                                 'to do the splitting')
 
     # adding arguments that are needed
-    parser.add_argument('-i', '--infile', dest='INFILE', help='Path to the file to open', required=True)
+    parser.add_argument('-i', '--infile', dest='INFILE', help='Path to the file to open',
+                        required=True)
 
     return parser.parse_args()
 
@@ -48,8 +56,9 @@ def get_header_and_sequence_lists(input_file):
     with input_file as file_handle:
         for line in file_handle:
 
-            # if the line starts with '>' append to headers list else join the seq lines and iterate the remaining 
-            # lines and keep adding to the string, after adding second header append the sequence lines to sequence list
+            # if the line starts with '>' append to headers list else join the seq lines and iterate
+            # the remaining lines and keep adding to the string, after adding second header append
+            # the sequence lines to sequence list
             if re.search(r"^>", line):
                 line = line.replace('\n', "")
                 headers.append(line)
@@ -59,7 +68,8 @@ def get_header_and_sequence_lists(input_file):
                 line = line.replace('\n', "")
                 seq_lines = seq_lines + line
 
-    # the last sequnce line cannot be appended as there were no headers so we are appending it to sequence list
+    # the last sequnce line cannot be appended as there were no headers so we are appending it
+    # to the sequence list
     if len(seq_lines) > 0:
         seqs.append(seq_lines)
 
@@ -98,7 +108,8 @@ def file_write(headers, seqs):
     # Iterating by zipping both the lists
     for header, sequence in zip(headers, seqs):
 
-        # If sequence word is present in headers then header and sequence of same index append to the files
+        # If sequence word is present in headers then header and sequence of same index
+        # append to the files
         if re.search(".*sequence", header):
             protein.write(header)
             protein.write("\n")
