@@ -79,6 +79,9 @@ def get_header_and_sequence_lists(input_file):
     # calling the function to check if headers and sequence list sizes are equal
     _check_size_of_lists(headers, seqs)
 
+    # closing the input file
+    input_file.close()
+
     # return headers and sequence list using iyt for testing
     return headers, seqs
 

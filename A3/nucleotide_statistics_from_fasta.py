@@ -96,6 +96,35 @@ def _check_size_of_lists(headers, seqs):
         return True
 
 
+def _get_nt_occurrence(nt_base, sequence):
+    """ Calculates the nucleotide occurrence in each sequence"""
+    count = 0
+
+    # list of bases to be considered
+    bases = ["A", "G", "T", "C", "N"]
+    if nt_base in bases:
+        for nucleotides in sequence:
+            if nt_base in nucleotides:
+                count += 1
+    else:
+        sys.exit("Did not code this condition")
+
+    # returning the total count of bases in each sequence
+    return count
+
+
+def _get_accession(header):
+    """ Getting the accession number from header line """
+
+    # splitting the header line after first space and keeping only before space and removing '>'
+    header = header.split(" ")
+    header = header[0]
+    accession = re.sub(">", "", header)
+
+    # returns accession number
+    return accession
+
+
 def print_sequence_stats(headers, seqs, output):
     """ Writing the sequence stats to a txt file """
 
@@ -132,39 +161,10 @@ def print_sequence_stats(headers, seqs, output):
         output.write('\t'.join(statistics) + '\n')
 
     # printing the statistics
-    # print('\t'.join(statistics) + '\n')
+    print('\t'.join(statistics) + '\n')
 
     # returning the last statistics for testing
     return statistics
-
-
-def _get_nt_occurrence(nt_base, sequence):
-    """ Calculates the nucleotide occurance in each sequence"""
-    count = 0
-
-    # list of bases to be considered
-    bases = ["A", "G", "T", "C", "N"]
-    if nt_base in bases:
-        for nucleotides in sequence:
-            if nt_base in nucleotides:
-                count += 1
-    else:
-        sys.exit("Did not code this condition")
-
-    # returning the total count of bases in each sequence
-    return count
-
-
-def _get_accession(header):
-    """ Getting the accession number from header line """
-
-    # splitting the header line after first space and keeping only before space and removing '>'
-    header = header.split(" ")
-    header = header[0]
-    accession = re.sub(">", "", header)
-
-    # returns accession number
-    return accession
 
 
 if __name__ == "__main__":
