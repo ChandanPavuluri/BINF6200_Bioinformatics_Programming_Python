@@ -20,7 +20,10 @@ def main():
 
 
 def args_parse():
-    """Function for commandline options"""
+    """
+    Function for command line arguments
+    @return: Instance of argparse arguments
+    """
 
     # Creating argument parser object
     parser = argparse.ArgumentParser(description='Give the fasta sequence file name '
@@ -34,7 +37,12 @@ def args_parse():
 
 
 def get_fh(input_file, read_write):
-    """Function for opening the file"""
+    """
+    Function for opening the file
+    @param input_file: File 2 open
+    @param read_write: method reading or writing
+    @return return file_handle
+     """
 
     # using try and except to catch the errors if its an IOError and ValueError
     try:
@@ -47,7 +55,11 @@ def get_fh(input_file, read_write):
 
 
 def get_header_and_sequence_lists(input_file):
-    """ Parsing over the input file and creating lists for headers and sequences"""
+    """
+    Parsing over the input file
+    @ param input_file : fasta file to read given in commandline arguments
+    @return lists for headers and sequences
+    """
 
     # creating empty lists
     headers = []
@@ -87,7 +99,11 @@ def get_header_and_sequence_lists(input_file):
 
 
 def _check_size_of_lists(headers, seqs):
-    """ Check if the lists are of equal size """
+    """
+    Check if the lists are of equal size
+    @parm headers: headers list
+    @param seqs: sequences list
+    """
 
     # if lists are of not equal size exit the program by displaying message
     if len(headers) != len(seqs):
@@ -98,7 +114,12 @@ def _check_size_of_lists(headers, seqs):
 
 
 def file_write(headers, seqs):
-    """ Writing two separate files for amino acid sequence and secondary structures"""
+    """
+     Writing two separate files for amino acid sequence and secondary structures
+    @parm headers: headers list
+    @param seqs: sequences list
+    @returns the counts of protein sequences and secondary structure sequences
+     """
 
     # Creating files for protein and secondary structures
     protein = get_fh("pdb_protein.fasta", "w")

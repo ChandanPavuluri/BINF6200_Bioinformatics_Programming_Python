@@ -20,7 +20,10 @@ def main():
 
 
 def args_parse():
-    """Function for arguments"""
+    """
+    Function for command line arguments
+    @return: Instance of argparse arguments
+    """
 
     # Creating argument parser object
     parser = argparse.ArgumentParser(description='Give the fasta sequence file name'
@@ -36,7 +39,12 @@ def args_parse():
 
 
 def get_fh(input_file, read_write):
-    """Function for opening the file"""
+    """
+    Function for opening the file
+    @param input_file: File 2 open
+    @param read_write: method reading or writing
+    @return return file_handle
+     """
 
     # using try and except to catch the errors if its an IOError and ValueError
     try:
@@ -49,7 +57,11 @@ def get_fh(input_file, read_write):
 
 
 def get_header_and_sequence_lists(input_file):
-    """ Parsing over the input file and creating lists for headers and sequences"""
+    """
+    Parsing over the input file
+    @ param input_file : fasta file to read given in commandline arguments
+    @return lists for headers and sequences
+    """
 
     # creating empty lists
     headers = []
@@ -86,7 +98,11 @@ def get_header_and_sequence_lists(input_file):
 
 
 def _check_size_of_lists(headers, seqs):
-    """ Check if the lists are of equal size """
+    """
+    Check if the lists are of equal size
+    @parm headers: headers list
+    @param seqs: sequences list
+    """
 
     # if lists are of not equal size exit the program by displaying message
     if len(headers) != len(seqs):
@@ -97,7 +113,11 @@ def _check_size_of_lists(headers, seqs):
 
 
 def _get_nt_occurrence(nt_base, sequence):
-    """ Calculates the nucleotide occurrence in each sequence"""
+    """
+    Calculates the nucleotide occurrence in each sequence
+    @nt_base: base to find the count
+    @sequence: sequence file
+    """
     count = 0
 
     # list of bases to be considered
@@ -114,7 +134,10 @@ def _get_nt_occurrence(nt_base, sequence):
 
 
 def _get_accession(header):
-    """ Getting the accession number from header line """
+    """
+    Getting the accession number from header line
+    @param header: headers list
+    """
 
     # splitting the header line after first space and keeping only before space and removing '>'
     header = header.split(" ")
@@ -126,7 +149,13 @@ def _get_accession(header):
 
 
 def print_sequence_stats(headers, seqs, output):
-    """ Writing the sequence stats to a txt file """
+    """
+    Writing the sequence stats to a txt file
+    @param headers: Headers list
+    @param seqs: sequence list
+    @param output: output file to write
+
+    """
 
     # Creating variables for the index
     index = 0
