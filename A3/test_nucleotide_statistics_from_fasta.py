@@ -7,7 +7,7 @@ import pytest
 
 # importing functions from program file to test the program
 from nucleotide_statistics_from_fasta import get_fh, get_header_and_sequence_lists, \
-        _get_accession, _get_nt_occurrence, print_sequence_stats
+    _get_accession, _get_nt_occurrence, print_sequence_stats
 
 # ignore all "Missing function or method docstring" since this is a unit test
 # pylint: disable=C0116
@@ -71,7 +71,8 @@ def test_print_sequence_stats():
     list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
     fh_out = get_fh("output.txt", "w")
     assert print_sequence_stats(list_headers, list_seqs, fh_out) == \
-            (["1", "E123", "3", "2", "2", "3", "0", "10", "40.0"])
+           (["1", "E123", "3", "2", "2", "3", "0", "10", "40.0"])
     os.remove("output.txt")
+
 
 os.remove("fasta.txt")
