@@ -1,6 +1,6 @@
 """Test suite for nucleotide_statistics_from_fasta.py"""
 
-# Importing the required modeules
+# Importing the required modules
 import os
 import pytest
 

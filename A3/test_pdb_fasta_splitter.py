@@ -1,6 +1,6 @@
 """Test suite for pdb_fasta_splitter.py"""
 
-# Importing the required modeules
+# Importing the required modules
 import os
 import pytest
 
