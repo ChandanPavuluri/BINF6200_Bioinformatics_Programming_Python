@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# pylint 2.4.4
-# astroid 2.3.3
-# Python 3.6.0 (default, Jan 16 2020, 13:24:17)
-# [GCC 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.16)]
-# cleslin@cleslinMacBook16[BINF6200]# flake8 --version
-# 3.7.9 (mccabe: 0.6.1, pycodestyle: 2.5.0, pyflakes: 2.1.1) CPython 3.6.0 on Darwin
 
 set -e
 # Search Results
