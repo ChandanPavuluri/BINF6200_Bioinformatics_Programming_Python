@@ -66,6 +66,7 @@ def description_dict(input_file):
             line[1] = line[1].replace('\n', "")
             description[line[0]] = line[1]
     print(description)
+    return(description)
 
 
 
@@ -73,5 +74,16 @@ def description_dict(input_file):
 args = args_parse()
 fh_in = my_io.get_fh(args.INFILE1, "r")
 fh_in2 = my_io.get_fh(args.INFILE2, "r")
-occurrence_dict(fh_in)
-description_dict(fh_in2)
+occur = occurrence_dict(fh_in)
+desp = description_dict(fh_in2)
+outfile = my_io.get_fh("categories.txt", 'w')
+outfile_header = ("Category","Occurrence","Description","\n")
+outfile.write("\t".join(outfile_header))
+for i in occur:
+    try:
+        pass
+        outfile.write(str(i)+"\t"+str(occur[i])+"\t"+desp[i]+"\n")
+    except KeyError:
+        pass
+fh_in.close()
+fh_in2.close()
