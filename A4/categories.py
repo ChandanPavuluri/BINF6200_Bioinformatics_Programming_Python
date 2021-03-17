@@ -16,11 +16,14 @@ def args_parse():
 
     # adding arguments that are needed
     parser.add_argument('-i1', '--infile1', dest='INFILE1',
-                        help='Path to the gene description file to open', required=True)
+                        help='Path to the gene description file to open',
+                        default="chr21_genes.txt")
     parser.add_argument('-i2', '--infile2', dest='INFILE2',
-                        help=' Path to the gene category to open',required=True)
+                        help=' Path to the gene category to open',
+                        default="chr21_genes_categories.txt")
 
     return parser.parse_args()
+
 
 def occurrence_dict(input_file):
     categories = {}
@@ -37,8 +40,8 @@ def occurrence_dict(input_file):
     removal_items = []
 
     for key, val in categories_count_dict.items():
-        # if digit is the key then pass else append to the list
-        if re.findall("\d+", key):
+        # if digit is the key then pass else append the key to the list
+        if re.findall(r"\d+", key):
             pass
         else:
             removal_items.append(key)
@@ -53,10 +56,10 @@ def occurrence_dict(input_file):
     # convert list to sorted dictionary
     categories_count_dict = dict(categories_sorted)
 
-
     print(categories_count_dict)
     # return categories_count_dict
     return categories_count_dict
+
 
 def description_dict(input_file):
     description = {}
@@ -66,9 +69,7 @@ def description_dict(input_file):
             line[1] = line[1].replace('\n', "")
             description[line[0]] = line[1]
     print(description)
-    return(description)
-
-
+    return description
 
 
 args = args_parse()
@@ -77,7 +78,7 @@ fh_in2 = my_io.get_fh(args.INFILE2, "r")
 occur = occurrence_dict(fh_in)
 desp = description_dict(fh_in2)
 outfile = my_io.get_fh("categories.txt", 'w')
-outfile_header = ("Category","Occurrence","Description","\n")
+outfile_header = ("Category", "Occurrence", "Description", "\n")
 outfile.write("\t".join(outfile_header))
 for i in occur:
     try:

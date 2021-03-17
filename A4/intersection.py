@@ -1,8 +1,11 @@
 import argparse
+import sys
 from assignment4 import my_io
 
 
 def main():
+    """Function for calling all the functions and printing the output"""
+
     args = args_parse()
     fh_in_1 = my_io.get_fh(args.INFILE1, "r")
     fh_in_2 = my_io.get_fh(args.INFILE2, "r")
@@ -11,12 +14,16 @@ def main():
     combined_count, combined_list = join_sort(infile1_list, infile2_list)
     fh_out = my_io.get_fh("intersection_output.txt", "w")
     fh_out.write('\n'.join(combined_list))
-    print("\n" + f"Number of unique gene names in {args.INFILE1}: {infile1_count}")
-    print(f"Number of unique gene names in {args.INFILE2}: {infile2_count}")
-    print(f"Number of common gene symbols found: {combined_count}")
-    print("Output stored in OUTPUT/intersection_output.txt")
+    print("\n" + f"Number of unique gene names in {args.INFILE1}: {infile1_count}", file=sys.stdout)
+    print(f"Number of unique gene names in {args.INFILE2}: {infile2_count}", file=sys.stdout)
+    print(f"Number of common gene symbols found: {combined_count}", file=sys.stdout)
+    print("Output stored in OUTPUT/intersection_output.txt", file=sys.stdout)
+
+    # Closing all the opened files
     fh_in_1.close()
     fh_in_2.close()
+    fh_out.close()
+
 
 def args_parse():
     """
@@ -30,33 +37,60 @@ def args_parse():
 
     # adding arguments that are needed
     parser.add_argument('-i1', '--infile1', dest='INFILE1', help='Gene list 1 to open',
-                        required=True)
+                        default="chr21_genes.txt")
     parser.add_argument('-i2', '--infile2', dest='INFILE2', help='Gene list 1 to open',
-                        required=True)
+                        default="HUGO_genes.txt")
 
     return parser.parse_args()
 
 
 def create_list(input_file):
+    """
+    Function for creating list for input files
+    @param input_file: File handle of the opened input file
+    @return gene_list and length of the list
+     """
     gene_list = []
     with input_file as file_handle:
         for line in file_handle:
             gene_symbol = line.split("\t")[0]
             gene_list.append(gene_symbol)
     gene_list.pop(0)
-    gene_list.sort()
+
+    # set helps in taking only unique values
     gene_set = set(gene_list)
+
+    # calculating the length of the set
     count = len(gene_set)
-    gene_list = list(gene_set)
+
+    # Converting the set to list
+    gene_list = list(gene_list)
+
+    # returning the gene_list and count
     return gene_list, count
 
 
 def join_sort(list_1, list_2):
-    unique = set(list_1).intersection(list_2)
-    count = len(unique)
+    """
+    Function for joining two lists
+    @param list_1: File handle of the opened input file
+    @param list_2: File handle of the opened input file
+    @return common elements count and joined list
+     """
+    # set() the larger list and then use function called interscetion() to
+    # compute the intersected list
+    common = set(list_1).intersection(list_2)
+
+    # Calculating the count of intersected list
+    count = len(common)
+
+    # Joining the two lists
     joint_list = list_1 + list_2
+
+    # Sorting the joined list
     joint_list.sort()
 
+    # returning the common elements count and Joined list
     return count, joint_list
 
 

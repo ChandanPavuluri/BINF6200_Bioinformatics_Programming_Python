@@ -8,8 +8,8 @@ def main():
 
     args = args_parse()
     fh_in = my_io.get_fh(args.INFILE, "r")
-    gene_ids = write_dict(fh_in)
-    gene_description(gene_ids)
+    gene_ids_dict = write_dict(fh_in)
+    gene_description(gene_ids_dict)
     fh_in.close()
 
 
@@ -25,7 +25,7 @@ def args_parse():
 
     # adding arguments that are needed
     parser.add_argument('-i', '--infile', dest='INFILE', help='Path to the file to open',
-                        required=True)
+                        default="chr21_genes.txt")
 
     return parser.parse_args()
 
@@ -37,28 +37,29 @@ def write_dict(input_file):
             line = line.split("\t")
             gene_ids_dict[line[0]] = line[1]
     gene_ids_dict.pop("Gene Symbol")
-    print(gene_ids_dict)
     return gene_ids_dict
 
 
 def _get_case_insensitive_dict(input_dict, key):
-    dict_value = next((value for dict_key, value in input_dict.items() if dict_key.lower() == key.lower()), None)
+    dict_value = next((value for dict_key, value in input_dict.items()
+                       if dict_key.lower() == key.lower()), None)
     return dict_value
 
 
 def gene_description(gene_dict):
     while True:
-        gene_name = str(input("Enter gene name of interest. Type quit to exit: "))
-        gene_name = gene_name.lower()
-        if gene_name == "quit" or gene_name == "exit":
+        gene_name = str(input("\nEnter gene name of interest. Type quit to exit: "))
+        gene_name_lower = gene_name.lower()
+        if gene_name_lower == "quit" or gene_name_lower == "exit":
             break
         else:
-            dict_value = _get_case_insensitive_dict(gene_dict, gene_name)
+            dict_value = _get_case_insensitive_dict(gene_dict, gene_name_lower)
             if dict_value is None:
-                print("Not a valid gene name.\n")
+                print("Not a valid gene name.\n", file=sys.stdout)
             else:
-                print("\n" + f"{gene_name} found! Here is the description:" + "\n" + f"{dict_value}" + "\n")
-    print("Thanks for querying the data.")
+                print("\n" + f"{gene_name} found! Here is the description:"
+                      + "\n" + f"{dict_value}" + "\n", file=sys.stdout)
+    print("Thanks for querying the data.", file=sys.stdout)
     sys.exit()
 
 
