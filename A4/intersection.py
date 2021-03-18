@@ -12,7 +12,7 @@ def main():
     infile1_list, infile1_count = create_list(fh_in_1)
     infile2_list, infile2_count = create_list(fh_in_2)
     combined_count, combined_list = join_sort(infile1_list, infile2_list)
-    fh_out = my_io.get_fh("intersection_output.txt", "w")
+    fh_out = my_io.get_fh("OUTPUT/intersection_output.txt", "w")
     fh_out.write('\n'.join(combined_list))
     print("\n" + f"Number of unique gene names in {args.INFILE1}: {infile1_count}", file=sys.stdout)
     print(f"Number of unique gene names in {args.INFILE2}: {infile2_count}", file=sys.stdout)
@@ -50,6 +50,8 @@ def create_list(input_file):
     @param input_file: File handle of the opened input file
     @return gene_list and length of the list
      """
+
+    # Initializing an empty list
     gene_list = []
     with input_file as file_handle:
         for line in file_handle:
@@ -73,8 +75,8 @@ def create_list(input_file):
 def join_sort(list_1, list_2):
     """
     Function for joining two lists
-    @param list_1: File handle of the opened input file
-    @param list_2: File handle of the opened input file
+    @param list_1: first file list
+    @param list_2: second file list
     @return common elements count and joined list
      """
     # set() the larger list and then use function called interscetion() to
