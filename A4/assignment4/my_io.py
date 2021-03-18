@@ -1,3 +1,9 @@
+"""
+my_io.py
+Importing this for opening the files in programs
+"""
+
+
 def get_fh(input_file, read_write):
     """
     Function for opening the file

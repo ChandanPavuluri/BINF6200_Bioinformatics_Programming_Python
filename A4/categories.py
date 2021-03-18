@@ -1,3 +1,9 @@
+"""
+categories.py
+#categories.py
+"""
+
+# importing required modules
 import argparse
 import collections
 import re
@@ -66,7 +72,7 @@ def occurrence_dict(input_file):
     # creating an empty removal list for adding keys other than categories
     removal_items = []
 
-    for key, val in categories_count_dict.items():
+    for key in categories_count_dict:
         # if digit is the key then pass else append the key to the list
         if re.findall(r"\d+", key):
             pass

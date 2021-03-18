@@ -1,3 +1,10 @@
+"""
+chr21_gene_names.py
+# chr21_gene_names.py
+
+"""
+
+# importing required modules
 import argparse
 import sys
 from assignment4 import my_io
@@ -78,19 +85,18 @@ def gene_description(gene_dict):
         # When user enters gene_name other than quit then it searches in dictionary
         if gene_name.lower() == "quit" or gene_name.lower() == "exit":
             break
-        else:
-            dict_value = _get_case_insensitive_dict(gene_dict, gene_name)
+        dict_value = _get_case_insensitive_dict(gene_dict, gene_name)
 
-            # when given key is not in dictionary it prints not a valid gene
-            # else prints description of given gene
-            if dict_value is None:
-                print("Not a valid gene name.\n", file=sys.stdout)
-            else:
-                print("\n" + f"{gene_name} found! Here is the description:"
-                      + "\n" + f"{dict_value}" + "\n", file=sys.stdout)
+        # when given key is not in dictionary it prints not a valid gene
+        # else prints description of given gene
+        if dict_value is None:
+            print("Not a valid gene name.\n", file=sys.stdout)
+        else:
+            print("\n" + f"{gene_name} found! Here is the description:" +
+                  "\n" + f"{dict_value}" + "\n", file=sys.stdout)
 
     # When user enters quit it prints message and exits out
-    print(f"Thanks for querying the data.", file=sys.stdout)
+    print("Thanks for querying the data.", file=sys.stdout)
     sys.exit()
 
 

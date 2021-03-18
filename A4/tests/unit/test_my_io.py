@@ -1,3 +1,8 @@
+"""
+Test Suite of my_io.py
+"""
+
+# Importing the required modules
 import os
 import pytest
 
@@ -11,14 +16,16 @@ from assignment4 import my_io
 
 FILE_2_TEST = "test.txt"
 
+
 def _create_test_file(file):
     # not actually run, the are just helper functions for the test script
     # create a test file
     open(file, "w").close()
 
+
 def test_existing_get_fh_4_reading():
-   # does it open a file for reading
-   # create a test file
+    # does it open a file for reading
+    # create a test file
     _create_test_file(FILE_2_TEST)
     # test
     test = my_io.get_fh(FILE_2_TEST, "r")
