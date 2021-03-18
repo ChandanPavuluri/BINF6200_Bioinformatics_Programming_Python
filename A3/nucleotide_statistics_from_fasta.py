@@ -190,10 +190,10 @@ def print_sequence_stats(headers, seqs, output):
         output.write('\t'.join(statistics) + '\n')
 
     # printing the statistics
-    print('\t'.join(statistics) + '\n')
+
 
     # returning the last statistics for testing
-    return statistics
+
 
 
 if __name__ == "__main__":

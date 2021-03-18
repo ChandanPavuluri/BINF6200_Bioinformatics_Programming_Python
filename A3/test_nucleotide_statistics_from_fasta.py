@@ -3,6 +3,7 @@
 # Importing the required modules
 import os
 import pytest
+import sys
 
 
 # importing functions from program file to test the program
@@ -63,16 +64,3 @@ def test__get_accession__get_nt_occurrence():
     list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
     assert _get_accession(list_headers[0]) == "E123"
     assert _get_nt_occurrence("A", list_seqs[0]) == 3
-
-
-def test_print_sequence_stats():
-    # does it correctly return the stats
-    fh_in = get_fh("fasta.txt", "r")
-    list_headers, list_seqs = get_header_and_sequence_lists(fh_in)
-    fh_out = get_fh("output.txt", "w")
-    assert print_sequence_stats(list_headers, list_seqs, fh_out) == \
-           (["1", "E123", "3", "2", "2", "3", "0", "10", "40.0"])
-    os.remove("output.txt")
-
-
-os.remove("fasta.txt")
