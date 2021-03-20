@@ -17,7 +17,8 @@ def main():
     infile1_list, infile1_count = create_list(fh_in_1)
     infile2_list, infile2_count = create_list(fh_in_2)
     combined_count, combined_list = join_sort(infile1_list, infile2_list)
-    fh_out = my_io.get_fh("OUTPUT/intersection_output.txt", "w")
+    outfile = "OUTPUT/intersection_output.txt"
+    fh_out = my_io.get_fh(outfile, "w")
     fh_out.write('\n'.join(combined_list))
     print("\n" + f"Number of unique gene names in {args.INFILE1}: {infile1_count}", file=sys.stdout)
     print(f"Number of unique gene names in {args.INFILE2}: {infile2_count}", file=sys.stdout)

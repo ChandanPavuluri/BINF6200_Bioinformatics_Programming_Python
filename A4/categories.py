@@ -18,16 +18,17 @@ def main():
     fh_in2 = my_io.get_fh(args.INFILE2, "r")
     occurrence = occurrence_dict(fh_in)
     description = description_dict(fh_in2)
-    outfile = my_io.get_fh("OUTPUT/categories.txt", 'w')
-    outfile_header = ("Category", "Occurrence", "Description", "\n")
-    outfile.write("\t".join(outfile_header))
+    outfile = "OUTPUT/categories.txt"
+    fh_out = my_io.get_fh(outfile, 'w')
+    fh_out_header = ("Category", "Occurrence", "Description", "\n")
+    fh_out.write("\t".join(fh_out_header))
     for i in occurrence:
-        outfile.write("\t".join([str(i), str(occurrence[i]), description[i]]) + "\n")
+        fh_out.write("\t".join([str(i), str(occurrence[i]), description[i]]) + "\n")
 
     # Closing all the opened files
     fh_in.close()
     fh_in2.close()
-    outfile.close()
+    fh_out.close()
 
 
 def args_parse():
