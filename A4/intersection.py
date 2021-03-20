@@ -85,7 +85,7 @@ def join_sort(list_1, list_2):
     @param list_2: second file list
     @return common elements count and joined list
      """
-    # set() the larger list and then use function called interscetion() to
+    # set() the larger list and then use function called intersection() to
     # compute the intersected list
     common = set(list_1).intersection(list_2)
 

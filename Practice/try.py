@@ -1,12 +1,13 @@
-astr = 'Hello Bob'
+
+import os
+final = ‘/Users/ckpav/PycharmProjects/BINF6200/Practice/result.txt'
+
 try:
-    istr = int(astr)
-except:
-    istr = -1
-print('First', istr)
-astr = '123'
-try:
-    istr = int(astr)
-except:
-    istr = -1
-print('Second', istr)
+    os.path.exists(final)
+    if True:
+        os.remove(final)
+except OSError as e:
+    print(f “Error: {e.strerror}”)
+
+
+
