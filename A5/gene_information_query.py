@@ -1,8 +1,30 @@
+"""
+gene_information_query.py
+#gene_information_query.py
+"""
+
+# importing required modules
 import argparse
 import sys
 import re
 from assignment5 import my_io
 from assignment5 import config
+
+
+def main():
+    args = args_parse()
+    gene = args.GENE
+    host,temp_host = modify_host_name(args.HOST)
+    file = "/".join((config.get_unigene_directory(), host, gene + "." + config.get_unigene_extension()))
+    print(file)
+    if my_io.is_valid_gene_file_name(file):
+        print(f"\nFound Gene {gene} for {temp_host}")
+    else:
+        print("Not found")
+        print(f"Gene {gene} does not exist for {temp_host}. exiting now...", file=sys.stderr)
+        sys.exit()
+    tissues = get_gene_data(file)
+    print_output(temp_host,gene,tissues)
 
 def args_parse():
     """
@@ -25,18 +47,22 @@ def args_parse():
 def modify_host_name(host_name):
     dict = config.get_host_keywords()
     host_name = host_name.lower()
+    host_name = re.sub("_"," ",host_name)
+
     if host_name not in dict.keys():
         _print_host_directories()
         sys.exit()
     else:
         host = dict[host_name]
-        return host
-
+        temp_host = re.sub("_"," ",host)
+        return host,temp_host
 
 
 def _print_host_directories():
     dict = config.get_host_keywords()
-    scientific_name= set(dict.values())
+    scientific_name = set(dict.values())
+    scientific_name = list(scientific_name)
+
     print("\nHere is a (non-case sensitive) list of available Hosts by scientific name")
     for (i, item) in enumerate(scientific_name, start=1):
         print(f"{i}. {item}")
@@ -45,7 +71,6 @@ def _print_host_directories():
 
     print("\nHere is a (non-case sensitive) list of available Hosts by common name")
     for (i, item) in enumerate(common_name, start=1):
-        item = str(item)
         item = item.capitalize()
         print(f"{i}. {item}")
 
@@ -54,31 +79,20 @@ def get_gene_data(file_name):
     for line in fh_in:
         if re.search("EXPRESS", line):
             line = line.replace("\n", "")
-            print(line)
             line = re.sub('[A-Z]', "",line)
-            print(line)
             line = line.split("|")
             line = [element.strip(' ') for element in line]
-            print(line)
-            for (i, item) in enumerate(line, start=1):
-                print(f"{i}. {item}")
+            line.sort()
+            return line
 
 
+def print_output(host,gene,tissue_list):
+    count = len(tissue_list)
+    print(f"In {host}, There are {count} tissues that {gene} is expressed in:\n")
+    for (i, item) in enumerate(tissue_list, start=1):
+        item = item.capitalize()
+        print(f"{i}. {item}")
 
 
 if __name__ == "__main__":
-    args = args_parse()
-    gene = args.GENE
-    host = modify_host_name(args.HOST)
-    file = "/".join((config.get_unigene_directory(), host, gene + "." + config.get_unigene_extension()))
-    print(file)
-    if my_io.is_valid_gene_file_name(file):
-        # using f-strings
-        print(f"\nFound Gene {gene} for {host}")
-    else:
-        print("Not found", file=sys.stderr)
-        print(f"Gene {gene} does not exist for {host}. exiting now...", file=sys.stderr)
-        sys.exit()
-    get_gene_data(file)
-
-
+    main()
