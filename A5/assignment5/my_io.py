@@ -4,7 +4,6 @@ Importing this for opening the files in programs
 """
 import os
 
-from assignment5 import config
 
 def get_fh(input_file, read_write):
     """

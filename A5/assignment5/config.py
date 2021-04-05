@@ -1,4 +1,7 @@
-
+"""
+config.py
+#config.py
+"""
 _UNIGENE_DIR = "C:/Users/ckpav/PycharmProjects/BINF6200/A5/data_directories"
 _UNIGENE_FILE_ENDING = "unigene"
 
@@ -32,7 +35,7 @@ def get_host_keywords():
             "mus musculus": mus_musculus,
             "mouse": mus_musculus,
             "mouses": mus_musculus,
-            "Ovis aries": ovis_aries,
+            "ovis aries": ovis_aries,
             "sheep": ovis_aries,
             "sheeps": ovis_aries,
             "rattus norvegicus": rattus_norvegicus,
@@ -43,4 +46,4 @@ def get_host_keywords():
 
 
 def get_error_string_4_unable_to_open():
-    print(f"Could not create the directory (unable to open)")
+    print(f"Could not open the file (unable to open)")
