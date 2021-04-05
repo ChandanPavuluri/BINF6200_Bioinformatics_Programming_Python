@@ -80,15 +80,15 @@ def get_gene_data(file_name):
         if re.search("EXPRESS", line):
             line = line.replace("\n", "")
             line = re.sub('[A-Z]', "",line)
-            line = line.split("|")
-            line = [element.strip(' ') for element in line]
-            line.sort()
-            return line
+            line_list = line.split("|")
+            line_list = [element.strip(' ') for element in line_list]
+            line_list.sort()
+            return line_list
 
 
-def print_output(host,gene,tissue_list):
+def print_output(host_name,gene_name,tissue_list):
     count = len(tissue_list)
-    print(f"In {host}, There are {count} tissues that {gene} is expressed in:\n")
+    print(f"In {host_name}, There are {count} tissues that {gene_name} is expressed in:\n")
     for (i, item) in enumerate(tissue_list, start=1):
         item = item.capitalize()
         print(f"{i}. {item}")
