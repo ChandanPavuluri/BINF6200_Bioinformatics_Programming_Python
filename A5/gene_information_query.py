@@ -17,7 +17,8 @@ def main():
     gene = args.GENE
     host = modify_host_name(args.HOST)
     temp_host = re.sub("_", " ", host)
-    file = "/".join((config.get_unigene_directory(), host, gene + "." + config.get_unigene_extension()))
+    file = "/".join((config.get_unigene_directory(), host, gene + "." +
+                     config.get_unigene_extension()))
     check_gene(file, gene, temp_host)
     tissues = get_gene_data(file)
     print_output(temp_host, gene, tissues)
@@ -63,7 +64,9 @@ def modify_host_name(host_name):
         _print_host_directories()
     else:
         scientific_host_name = host_dict[host_name]
-        return scientific_host_name
+
+    # returns the host name
+    return scientific_host_name
 
 
 def _print_host_directories():
@@ -153,8 +156,8 @@ def get_gene_data(file_name):
             # sorting the list in alphabetical order
             line_list.sort()
 
-            # returns the sorted list
-            return line_list
+    # returns the sorted list
+    return line_list
 
 
 def print_output(host_name, gene_name, tissue_list):
