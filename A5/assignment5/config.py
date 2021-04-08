@@ -23,11 +23,11 @@ def get_host_keywords():
     rattus_norvegicus = "Rattus_norvegicus"
 
     host_keywords = {
-            "bos taurus": bos_tarus,
-            "cow": bos_tarus,
-            "cows": bos_tarus,
-            "homo sapiens": homo_sapiens,
-            "human": homo_sapiens,
+    "bos taurus": bos_tarus,
+    "cow": bos_tarus,
+    "cows": bos_tarus,
+    "homo sapiens": homo_sapiens,
+    "human": homo_sapiens,
             "humans": homo_sapiens,
             "equus caballus": equus_caballus,
             "horse": equus_caballus,
