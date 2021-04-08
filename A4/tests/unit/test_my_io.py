@@ -57,5 +57,3 @@ def test_get_fh_4_ValueError():
     with pytest.raises(ValueError):
         my_io.get_fh("does_not_exist.txt", "rr")
         os.remove(FILE_2_TEST)
-
-

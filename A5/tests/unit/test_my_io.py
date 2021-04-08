@@ -53,10 +53,8 @@ def test_get_fh_4_IOError():
 def test_get_fh_4_ValueError():
     # does it raise ValueError
     # this should exit
-    _create_test_file(FILE_2_TEST)
     with pytest.raises(ValueError):
         my_io.get_fh("does_not_exist.txt", "rr")
-        os.remove(FILE_2_TEST)
 
 
 def test_is_valid_gene_file_name():

@@ -2,7 +2,7 @@
 config.py
 #config.py
 """
-_UNIGENE_DIR = "C:/Users/ckpav/PycharmProjects/BINF6200/A5/data_directories"
+_UNIGENE_DIR = "/home/chandan/BINF6200/A5/data_directories"
 _UNIGENE_FILE_ENDING = "unigene"
 
 
@@ -45,9 +45,9 @@ def get_host_keywords():
     return host_keywords
 
 
-def get_error_string_4_unable_to_open():
-    print(f"Could not open the file (unable to open)")
+def get_error_string_4_ValueError():
+    print("Invalid argument Value for opening a file for reading/writing")
 
+def get_error_string_4_TypeError():
+    print("Invalid argument Type passed in:")
 
-host = get_host_keywords()
-print(host['bos taurus'])
