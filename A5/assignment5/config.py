@@ -47,3 +47,7 @@ def get_host_keywords():
 
 def get_error_string_4_unable_to_open():
     print(f"Could not open the file (unable to open)")
+
+
+host = get_host_keywords()
+print(host['bos taurus'])

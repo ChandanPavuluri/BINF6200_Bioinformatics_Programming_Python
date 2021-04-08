@@ -170,7 +170,7 @@ def print_output(host_name, gene_name, tissue_list):
 
     print(f"In {host_name}, There are {count} tissues that {gene_name} is expressed in:\n")
 
-    # # By using enumerate printing along with index
+    # By using enumerate printing along with index
     for (i, item) in enumerate(tissue_list, start=1):
         item = item.capitalize()
         print(f"{i:2}. {item}")
