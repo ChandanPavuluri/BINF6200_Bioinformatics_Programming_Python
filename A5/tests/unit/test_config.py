@@ -4,7 +4,7 @@ Test Suite of config.py
 
 # Importing the required modules
 import os
-import pytest
+#import pytest
 
 # importing functions from program file to test the program
 from assignment5 import config
@@ -21,7 +21,7 @@ _UNIGENE_FILE_ENDING = "unigene"
 
 def test_get_unigene_directory():
     # checks if it returns the absolute path to the program data
-    assert os.path.exists(config.get_unigene_directory()) == True
+    assert os.path.exists(config.get_unigene_directory()) is True
 
 
 def test_get_unigene_extension():

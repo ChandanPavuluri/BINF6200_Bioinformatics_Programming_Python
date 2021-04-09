@@ -58,4 +58,4 @@ def test_get_fh_4_ValueError():
 
 
 def test_is_valid_gene_file_name():
-    assert my_io.is_valid_gene_file_name(FILE_2_TEST) == False
+    assert my_io.is_valid_gene_file_name(FILE_2_TEST) is False
