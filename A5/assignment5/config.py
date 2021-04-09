@@ -22,13 +22,16 @@ def get_unigene_extension():
 
 def get_host_keywords():
     """ return a dictionary of the hosts"""
+    
+    # assigning to the variable
     bos_tarus = "Bos_taurus"
     homo_sapiens = "Homo_sapiens"
     equus_caballus = "Equus_caballus"
     mus_musculus = "Mus_musculus"
     ovis_aries = "Ovis_aries"
     rattus_norvegicus = "Rattus_norvegicus"
-
+    
+    # creating a dictionary
     host_keywords = {
         "bos taurus": bos_tarus,
         "cow": bos_tarus,
@@ -49,6 +52,8 @@ def get_host_keywords():
         "rat": rattus_norvegicus,
         "rats": rattus_norvegicus
     }
+    
+    # returns the dictionary
     return host_keywords
 
 
