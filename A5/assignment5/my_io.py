@@ -21,6 +21,7 @@ def get_fh(input_file, read_write):
     except ValueError:
         raise ValueError
 
+
 def is_valid_gene_file_name(file):
     """ checks if the gene exits """
     return os.path.exists(file)

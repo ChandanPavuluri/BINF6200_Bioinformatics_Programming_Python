@@ -61,6 +61,7 @@ def get_error_string_4_ValueError():
     """ Print the invalid argument type message and exits the program """
     print("Invalid argument Value for opening a file for reading/writing")
 
+
 def get_error_string_4_TypeError():
     """ Print the invalid argument type message and exits the program """
     print("Invalid argument Type passed in:")
