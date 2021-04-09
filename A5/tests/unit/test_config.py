@@ -4,7 +4,7 @@ Test Suite of config.py
 
 # Importing the required modules
 import os
-#import pytest
+# import pytest
 
 # importing functions from program file to test the program
 from assignment5 import config
@@ -43,7 +43,8 @@ def test_get_host_keywords():
 
 
 def test_get_error_string_4_ValueError():
-    assert config.get_error_string_4_ValueError() == print("Invalid argument Value for opening a file for reading/writing")
+    assert config.get_error_string_4_ValueError() == print("Invalid argument "
+                                                           "Value for opening a file for reading/writing")
 
 
 def test_get_error_string_4_TypeError():
