@@ -17,9 +17,11 @@ def get_fh(input_file, read_write):
         file_to_open = open(input_file, read_write)
         return file_to_open
     except IOError:
-        raise IOError(config.get_error_string_4_IOError())
+        config.get_error_string_4_IOError(input_file,read_write)
+        raise IOError
     except ValueError:
-        raise ValueError(config.get_error_string_4_ValueError())
+        config.get_error_string_4_ValueError()
+        raise ValueError()
 
 
 def is_valid_gene_file_name(file):
