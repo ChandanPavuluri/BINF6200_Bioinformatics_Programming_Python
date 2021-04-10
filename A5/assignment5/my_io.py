@@ -17,7 +17,7 @@ def get_fh(input_file, read_write):
         file_to_open = open(input_file, read_write)
         return file_to_open
     except IOError:
-        config.get_error_string_4_IOError(input_file,read_write)
+        config.get_error_string_4_IOError(input_file, read_write)
         raise IOError
     except ValueError:
         config.get_error_string_4_ValueError()
