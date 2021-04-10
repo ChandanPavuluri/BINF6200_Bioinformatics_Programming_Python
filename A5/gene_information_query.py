@@ -138,7 +138,7 @@ def get_gene_data(file_name):
     for line in fh_in:
 
         # if EXPRESS is found extract that line
-        if re.search("EXPRESS", line):
+        if re.search("^EXPRESS", line):
 
             # replacing the newline character
             line = line.replace("\n", "")
