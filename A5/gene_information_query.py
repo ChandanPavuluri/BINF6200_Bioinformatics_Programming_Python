@@ -164,8 +164,8 @@ def print_output(host_name, gene_name, tissue_list):
     """
         Function for printing the output
         @param host_name: temporary host name is given
-        @gene_name: user entered gene name
-        @tissue_list: list generated from get_gene_data
+        @param gene_name: user entered gene name
+        @param tissue_list: list generated from get_gene_data
     """
 
     # calculates the length of the list
