@@ -3,7 +3,7 @@ my_io.py
 Importing this for opening the files in programs
 """
 import os
-
+from assignment5 import config
 
 def get_fh(input_file, read_write):
     """
@@ -17,9 +17,9 @@ def get_fh(input_file, read_write):
         file_to_open = open(input_file, read_write)
         return file_to_open
     except IOError:
-        raise IOError from None
+        raise IOError(config.get_error_string_4_IOError())
     except ValueError:
-        raise ValueError
+        raise ValueError(config.get_error_string_4_ValueError())
 
 
 def is_valid_gene_file_name(file):

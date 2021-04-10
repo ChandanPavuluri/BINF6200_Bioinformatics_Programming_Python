@@ -6,7 +6,7 @@ config.py
 # Error" doesn't conform to snake_case naming style
 # pylint: disable=invalid-name
 
-_UNIGENE_DIR = "/home/chandan/BINF6200/A5/data_directories"
+_UNIGENE_DIR = "C:/Users/ckpav/OneDrive/Desktop/A5/data_directories"
 _UNIGENE_FILE_ENDING = "unigene"
 
 
@@ -65,3 +65,8 @@ def get_error_string_4_ValueError():
 def get_error_string_4_TypeError():
     """ Print the invalid argument type message and exits the program """
     print("Invalid argument Type passed in:")
+
+
+def get_error_string_4_IOError(file=None, mode=None):
+    """ Print the invalid argument type message and exits the program """
+    print(f"Could not open the file: {file} for mode '{mode}'")
