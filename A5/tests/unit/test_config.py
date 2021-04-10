@@ -36,16 +36,19 @@ def test_get_host_keywords():
     assert host_dict['bos taurus'] == 'Bos_taurus'
     assert host_dict['human'] == 'Homo_sapiens'
     assert host_dict['homo sapiens'] == 'Homo_sapiens'
+    assert host_dict['horse'] == 'Equus_caballus'
     assert host_dict['equus caballus'] == 'Equus_caballus'
     assert host_dict['mus musculus'] == 'Mus_musculus'
     assert host_dict['ovis aries'] == 'Ovis_aries'
-    assert host_dict['rattus norvegicus'] == 'Rattus_norvegicus'
+    assert host_dict['rat'] == 'Rattus_norvegicus'
 
 
 def test_get_error_string_4_ValueError():
+    # checking if the invalid argument type
     assert config.get_error_string_4_ValueError() == print("Invalid argument Value for "
                                                            "opening a file for reading/writing")
 
 
 def test_get_error_string_4_TypeError():
+    # checking if the invalid argument type
     assert config.get_error_string_4_TypeError() == print("Invalid argument Type passed in:")
