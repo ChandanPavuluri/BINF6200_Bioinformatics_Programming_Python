@@ -62,6 +62,7 @@ def modify_host_name(host_name):
     # else return the value to the given host name
     if host_name not in host_dict.keys():
         _print_host_directories()
+        sys.exit()
     else:
         scientific_host_name = host_dict[host_name]
 
@@ -103,8 +104,6 @@ def _print_host_directories():
     for (i, item) in enumerate(common_name, start=1):
         item = item.capitalize()
         print(f"{i:2}. {item}")
-
-    sys.exit()
 
 
 def check_gene(file_name, gene_name, temp_host):
@@ -148,16 +147,16 @@ def get_gene_data(file_name):
             line = re.sub('[A-Z]', "", line)
 
             # Splitting the lines at "|" and creating the list
-            line_list = line.split("|")
+            tissue_list = line.split("|")
 
             # removing the space before the elements
-            line_list = [element.strip(' ') for element in line_list]
+            tissue_list = [element.strip(' ') for element in tissue_list]
 
             # sorting the list in alphabetical order
-            line_list.sort()
+            tissue_list.sort()
 
     # returns the sorted list
-    return line_list
+    return tissue_list
 
 
 def print_output(host_name, gene_name, tissue_list):
